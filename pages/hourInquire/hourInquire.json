@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-row": "../../iviewModule/row/index",
+    "i-col": "../../iviewModule/col/index"
+  }
+}

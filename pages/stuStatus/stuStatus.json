@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "i-tabs": "../../iviewModule/tabs/index",
+    "i-tab": "../../iviewModule/tab/index",
+    "i-tag": "../../iviewModule/tag/index",
+    "i-icon": "../../iviewModule/icon/index",
+    "i-row": "../../iviewModule/row/index",
+    "i-col": "../../iviewModule/col/index",
+    "i-button":"../../iviewModule/button/index",
+    "i-load-more": "../../iviewModule/load-more/index"
+  }
+}

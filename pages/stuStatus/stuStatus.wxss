@@ -1,0 +1,81 @@
+/* pages/stuStatus/stuStatus.wxss */
+@import '../../iviewModule/card/index.wxss';
+.stu-drawer {
+	width:80vw;
+	height: 100vh;
+	background:#fff;
+}
+.stu-background {
+ background:#ccc;
+}
+.sort-list{
+  justify-content: space-around;
+  display: flex;
+  background: white;
+  width: 100%;
+  height: 32px;
+  font-size: 27rpx;
+  color: #6A6A6A;
+  align-content: center;
+  border: 1rpx solid #ECECEC;
+  align-items: center;
+}
+.sort{
+  text-align: center;
+  height: 100%;
+  line-height: 30px;
+  border-right: 1rpx solid #ECECEC; 
+  flex: 1;
+}
+.all-sort-list{
+  display: none;
+}
+.all-sort-list.all-act{
+  display: block;
+
+  position: fixed;
+  top: 32px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  background: rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease-in-out;
+}
+.all-sort{
+  width: 100%;
+  height: 32px;
+  line-height: 32px;
+  background: white;
+  padding-left: 5%;
+}
+.filterList-characteristic-title{
+  position: relative;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #FBFBFB;
+  font-weight: 400;
+  padding-left: 30rpx;
+}
+.filterList-characteristic-title::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15rpx;
+  display: inline-block;
+  width: 5rpx;
+  height: 20rpx;
+  background: #FED161;
+}
+.filterList-sort-list{
+  flex-direction: column;
+  border-top: 1px solid rgba(0,0,0,0);
+  /* display: flex; */
+  display: block;
+}
+.filterList-sort{
+  font-size: 25rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 30rpx;
+}

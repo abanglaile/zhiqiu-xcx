@@ -1,0 +1,20 @@
+<!--pages/contractLog.wxml-->
+<view>
+  <view>电子合同充值记录</view>
+  <i-row>
+    <i-col span="6" i-class="col-class">操作时间</i-col>
+    <i-col span="6" i-class="col-class">
+      <view style="background-color:gray;color:white">
+        操作课时
+      </view>
+    </i-col>
+    <i-col span="12" i-class="col-class">操作日志</i-col>
+  </i-row>
+  <view>
+    <i-row>
+      <i-col span="6" i-class="col-class">col-8</i-col>
+      <i-col span="6" i-class="col-class">col-8</i-col>
+      <i-col span="12" i-class="col-class">col-8</i-col>
+    </i-row>
+  </view>
+</view>
