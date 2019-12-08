@@ -5,6 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
+    filter_visible: false,
+    select_tab_num: 0,
+    sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已签到', value: 1 }, { text: '未签到', value: 2 }],
+    label_list: [{ text: '全部类型', value: 0, type: 'warn' }, { text: '函授', value: 1 }, { text: '导学', value: 2 }],
+    time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }],
+    course_list: [
+      { name: '语文', id: 0, selectd: false },
+      { name: '数学', id: 1, selectd: false },
+      { name: '英语', id: 2, selectd: false },
+    ],
+
     visible: false,
     select_time_drawr: false,
     select_course_draw:false,
@@ -29,7 +40,7 @@ Page({
     all_states: false,
     selectd: 0,
     testCourseJson:[
-      {txt:'语文', id:0,selectd:false},
+      { txt:'语文', id:0,selectd:false},
       { txt: '数学', id: 1, selectd: false},
       { txt: '英语', id: 2, selectd: false},
       { txt: '声乐', id: 3, selectd: false }
@@ -161,7 +172,7 @@ Page({
       select_time_draw: !this.data.select_time_draw
     })
   },
-    changeCourseBox: function(e){
+  changeCourseBox: function(e){
     this.setData({
       select_course_draw: !this.data.select_course_draw
     })
@@ -183,4 +194,47 @@ Page({
       lebel_selectd: e.target.dataset['index']
     })
   },
+
+  /**********/
+  selectTab: function (e) {
+    console.log(this.data.filter_visible)
+    this.setData({
+      filter_visible: !this.data.filter_visible,
+      select_tab_num: e.target.dataset.num
+    })
+  },
+
+  selectTime(e) {
+    let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }];
+    const index = e.detail.index
+    time_list[index].type = 'warn';
+    this.setData({
+      select_time_index: index,
+      time_list: time_list,
+      filter_visible: false
+    })
+  },
+
+  selectLabel(e) {
+    let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }];
+    const index = e.detail.index
+    time_list[index].type = 'warn';
+    this.setData({
+      select_time_index: index,
+      time_list: time_list,
+      filter_visible: false
+    })
+  },
+
+  selectSign(e) {
+    let sign_list = [{ text: '不限', value: 0 }, { text: '已签到', value: 1 }, { text: '未签到', value: 2 }]
+    const index = e.detail.index
+    sign_list[index].type = 'warn'
+    console.log(sign_list)
+    this.setData({
+      select_sign_index: index,
+      sign_list: sign_list,
+      filter_visible: false
+    })
+  }
 })

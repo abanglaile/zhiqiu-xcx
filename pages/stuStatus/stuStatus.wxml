@@ -6,73 +6,94 @@
     <wux-filterbar items="{{filter_items}}" style="background-color:blue"/>
     </view> -->
     <view class="sort-list">
-      <view class="sort" data-num="3" bindtap="changeLabelBox">
+      <view class="sort" data-num="1" bindtap="selectTab">
         授课方式
         <i-icon type="{{all_states==true?'packup':'unfold'}}" size="20" color="#ccc" />
       </view>
-      <view class="sort" data-num="1" bindtap="changeTimeBox">
-        时间
+      <view class="sort" data-num="2" bindtap="selectTab">
+        全部时间
         <i-icon type="{{all_states==true?'packup':'unfold'}}" size="20" color="#ccc" />
       </view>
-      <view class="sort" data-num="2" bindtap="changeCourseBox">
+      <view class="sort" data-num="3" bindtap="selectTab">
         科目
         <i-icon type="{{all_states==true?'packup':'unfold'}}" size="20" color="#ccc" />
       </view>
-      <view class="sort" data-num="0" bindtap="changeBox">
-        更多
+      <view class="sort" data-num="4" bindtap="selectTab">
+        未签到
         <!-- <i-icon type="{{all_states==true?'packup':'unfold'}}" size="20" color="#ccc" /> -->
         <i-icon type="more" size="20" color="#ccc" />
       </view>
     </view>
 
-    <view class="all-sort-list {{select_label_draw==true?'all-act':''}}" bindtap="changeLabelBox" bind:close="changeLabelBox" style="z-index:1;">
+    <view class="filterList-box {{(select_tab_num == 1 && filter_visible) ? 'filter-act' : ''}}}" bindtap="changeLabelBox" bind:close="changeLabelBox" style="z-index:1;">
       <!-- <view wx:if="{{ all_states }}" class="sort-mask" bindtap="changeBox">aaaaa</view> -->
       <view wx:for="{{lebel_list}}" class="all-sort" wx:key="num" bindtap="selectLabel" data-index="{{item.num}}">
         {{item.txt}}
         <i-icon type="right" style="right:5%;position:absolute;" wx:if="{{lebel_selectd==item.num}}" />
       </view>
-
-      <!-- <i-row>
-       <i-col span='12' i-class="col-class">
-         <view style="height:40px;background:blue;line-height:40px">确定</view>
-       </i-col>
-      <i-col span='12' i-class="col-class">
-         <view style="height:40px;background:white;line-height:40px">取消</view>
-       <i-button bind:click="changeBox">取消</i-button>
-      </i-col>
-      </i-row> -->
     </view>
 
-    <view class="all-sort-list {{select_time_draw==true?'all-act':''}}" bindtap="changeTimeBox" bind:close="changeTimeBox" style="z-index:1;">
-      <view style="background:white;width:100%;">
+    <view class="filterList-box {{(select_tab_num == 12 && filter_visible) ? 'filter-act' : ''}}">
+      <view style="background-color: white; padding-bottom: 20rpx;border: 1rpx solid #ECECEC;">
         <view style="padding-left:5%">时间选择</view>
-        <i-row>
-          <i-col span='8' i-class="col-class">
-            <picker mode="date" value='{{startDate}}' bindchange='startDateChange' style="z-index:2;">
-              <view class="picker">
-                {{startDate}}
-              </view>
-            </picker>
-          </i-col>
-          <i-col span='8' i-class="col-class">-</i-col>
-          <i-col span='8' i-class="col-class">
-            <picker mode="date" value='{{endDate}}' bindchange='endDateChange'>
-              <view class="picker">
-                {{endDate}}
-              </view>
-            </picker>
-          </i-col>
-        </i-row>
-      </view>
-    </view>
-
-    <view class="all-sort-list {{ select_course_draw==true?'all-act':''}}" bindtap="changeCourseBox" bind:close="changeCourseBox" style="z-index:1;">
-      <view style="background:white;width:100%;">
-        <view wx:for="{{testCourseJson}}" wx:key="num" style="background:white;width:100%;">
-          <i-button bind:click="selectCourse" data-index="{{item.id}}" size="small" type="{{item.selectd==true?'ghost':'primary'}}" style="disable:block;float:left;background:white;" i-class="height:30px;line-height:30px;">{{item.txt}}</i-button>
+        <view style="margin-left: 100rpx;">  
+          <i-row style="font-size: 35rpx; color: #2d8cf0;text-align: center;">
+            <i-col span='8'>
+              <picker mode="date" value='{{startDate}}' bindchange='startDateChange'>
+                <view class="picker">
+                  {{startDate}}
+                </view>
+              </picker>
+            </i-col>
+            <i-col span='2' i-class="col-class">至</i-col>
+            <i-col span='8' i-class="col-class">
+              <picker mode="date" value='{{endDate}}' bindchange='endDateChange'>
+                <view class="picker">
+                  {{endDate}}
+                </view>
+              </picker>
+            </i-col>
+          </i-row>
+        </view>
+        <view>
+          <button style="margin: 40rpx 0 0 580rpx; background-color: #2d8cf0; font-size: 14px;color: white;width: 70px;">确定</button>
         </view>
       </view>
     </view>
+  
+
+  <mp-actionSheet bindactiontap="selectTime" show="{{select_tab_num == 1 && filter_visible}}" actions="{{time_list}}" >
+  </mp-actionSheet>
+
+  <mp-actionSheet bindactiontap="selectSign" show="{{select_tab_num == 2 && filter_visible}}" actions="{{sign_list}}" >
+  </mp-actionSheet>
+
+  <mp-actionSheet show="{{select_tab_num == 3 && filter_visible}}" actions="{{[{ text: '全部时间', value: 1 },{ text: '本周', value: 2 },{ text: '一周内', type: 'warn', value: 3 }]}}" >
+  </mp-actionSheet>
+
+  <mp-halfScreenDialog 
+    show="{{(select_tab_num == 4 && filter_visible)}}"
+    maskClosable="false"
+    buttons="{{[{type: 'default', text: '全选', value: 0}, {type: 'primary', text: '确定', value: 1}]}}"
+  >
+    <view slot="title">选择科目</view>
+    <view slot="desc" class="filterList-sort-list"> 
+      <button class="filter-btn-select" size="mini">政治</button>     
+      <button size="mini" class="filter-btn" wx:for="{{course_list}}">{{item.name}}</button>
+    </view>
+  </mp-halfScreenDialog>
+
+  <view class="filterList-box {{(select_tab_num == 5 && filter_visible) ? 'filter-act' : ''}}">
+    <view style="background-color: white; padding-bottom: 20rpx;border: 1rpx solid #ECECEC;">
+      <view class="filterList-sort-list"> 
+        <button class="filter-btn-select" size="mini">政治</button>     
+        <button size="mini" class="filter-btn" wx:for="{{course_list}}">{{item.name}}</button>
+      </view>
+      <view>
+        <button style="margin: 40rpx 0 0 580rpx; background-color: #2d8cf0; font-size: 14px;color: white;width: 70px;">确定</button>
+      </view>
+    </view>
+  </view>
 
     <!-- <view class="all-sort-list {{all_states==true?'all-act':''}}" bindtap="changeBox" bind:close="changeBox" style="z-index:1;">
       <view wx:for="{{all_list}}" class="all-sort" wx:key="num" bindtap="select" data-index="{{item.num}}">
@@ -89,12 +110,6 @@
         </i-col>
       </i-row>
     </view> -->
-    <view class="all-sort-list {{all_states==true?'all-act':''}}" bindtap="changeBox" bind:close="changeBox" style="z-index:1;">
-      <view class="filterList-characteristic-title">签到情况</view>
-      <view class="filterList-sort-list">
-        <view wx:for="{{all_list}}" class="filterList-sort" data-index="{{item.num}}">{{item.txt}}</view>
-      </view>
-    </view>
 
     <view wx:for="{{testJson}}" wx:for-index="idx" wx:key="id" style="padding: 6px 0 0 0;">
       <view class="i-card">
