@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
+    "pages/authorize/authorize",
     "pages/stuStatus/stuStatus",
     "pages/contractLog/contractLog",
     "pages/hourInquire/hourInquire"
