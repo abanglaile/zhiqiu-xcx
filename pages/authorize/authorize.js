@@ -29,10 +29,12 @@ Page({
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       app.globalData.userInfo = e.detail.userInfo;
-      
       //插入登录的用户的相关信息到数据库
-      let that = this;
-      that.insertUserInfo(e);
+      // let that = this;
+      // that.insertUserInfo(e);
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
       
     } else {
       //用户按了拒绝按钮
