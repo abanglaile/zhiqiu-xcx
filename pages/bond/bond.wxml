@@ -1,0 +1,25 @@
+<!--pages/contractLog.wxml-->
+
+<i-panel title="已绑定">
+  <i-cell-group>
+    <i-cell title="新增绑定" is-link bind:click="onAddStudent">
+      <i-icon slot="icon" type="addressbook_fill" size="28" color="#5cadff"/>
+    </i-cell>
+    <i-cell wx:for="{{ students }}" wx:key="userid" title="{{ item.realname }}" is-link bind:click="onTapStudent">
+      <i-avatar slot="icon" src="{{ item.avatar }}" size="default"></i-avatar>
+    </i-cell>
+  </i-cell-group>
+</i-panel>
+
+<i-modal title="新增绑定" visible="{{ visible.modal }}" show-ok="{{ false }}" bind:cancel="onCancleParentBond">
+  <i-input value="{{ code }}" data-code="{{ code }}" placeholder="请输入绑定码" maxlength="100" bind:blur="onApiCheckCode" />
+  <i-panel wx:if="{{ visible.alert }}" hide-border="{{ true }}">
+    <view class="alert"><i-icon type="prompt" />无效验证码</view>
+  </i-panel>
+  <i-cell wx:if="{{ visible.preview }}" title="{{ userFromCode.realname }}" is-link bind:click="onApiParentBond">
+    <i-avatar slot="icon" src="{{ userFromCode.avatar }}" size="default"></i-avatar>
+  </i-cell>
+  <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
+</i-modal>
+
+<i-toast id="toast" />

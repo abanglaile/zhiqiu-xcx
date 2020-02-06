@@ -1,0 +1,4 @@
+/* pages/bond.wxss */
+.alert {
+    color: #ed3f14;
+}

@@ -10,10 +10,13 @@
   <view class="usermotto" bindtap='goToStuStatus'>
     <text class="user-motto">{{motto}}</text>
   </view>
-  <view  bindtap='goToContractLog'>
+  <view bindtap='goToContractLog'>
     <text class="user-motto">goToContractLog</text>  
   </view>
-    <view  bindtap='goToHourInquire'>
+  <view bindtap='goToHourInquire'>
     <text class="user-motto">goToHourInquire</text>  
+  </view>
+  <view bindtap='goToBond'>
+    <text class="user-motto">goToBond</text>  
   </view>
 </view>

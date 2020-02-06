@@ -65,5 +65,10 @@ Page({
     wx.navigateTo({
       url: '../hourInquire/hourInquire',
     })
+  },
+  goToBond: function(e) {
+    wx.navigateTo({
+      url: '../bond/bond',
+    })
   }
 })

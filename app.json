@@ -5,7 +5,8 @@
     "pages/authorize/authorize",
     "pages/stuStatus/stuStatus",
     "pages/contractLog/contractLog",
-    "pages/hourInquire/hourInquire"
+    "pages/hourInquire/hourInquire",
+    "pages/bond/bond"
   ],
   "window": {
     "backgroundTextStyle": "light",
