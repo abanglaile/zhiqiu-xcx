@@ -1,1 +1,3 @@
 /* pages/contractLog.wxss */
+@import '../../iviewModule/card/index.wxss';
+@import '../../iviewModule/avatar/index.wxss';

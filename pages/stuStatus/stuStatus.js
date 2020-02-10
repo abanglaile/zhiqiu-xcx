@@ -7,14 +7,20 @@ Page({
   data: {
     filter_visible: false,
     select_tab_num: 0,
-    sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已签到', value: 1 }, { text: '未签到', value: 2 }],
-    label_list: [{ text: '全部类型', value: 0, type: 'warn' }, { text: '函授', value: 1 }, { text: '导学', value: 2 }],
+    sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }],
     time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }],
-    course_list: [
-      { name: '语文', id: 0, selectd: false },
-      { name: '数学', id: 1, selectd: false },
-      { name: '英语', id: 2, selectd: false },
+    label_list: [
+      { text: '函授', index: 0, selected: false }, 
+      { text: '导学', index: 1, selected: false }
     ],
+    course_list: [
+      { text: '语文', id: 0, selected: false },
+      { text: '数学', id: 1, selected: false },
+      { text: '英语', id: 2, selected: false }
+    ],
+
+    select_time: '全部时间',
+    select_sign: '未上课',
 
     visible: false,
     select_time_drawr: false,
@@ -204,37 +210,75 @@ Page({
     })
   },
 
+  getStudentLesson() {
+    wx.request({
+      url: 'test.php', //仅为示例，并非真实的接口地址
+      data: {
+        select_time: this.data.select_time,
+        select_sign: this.data.select_sign,
+        select_course: this.data.course_list,
+        select_label: this.data.label_list,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
+  },
+
   selectTime(e) {
     let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }];
     const index = e.detail.index
     time_list[index].type = 'warn';
     this.setData({
-      select_time_index: index,
-      time_list: time_list,
-      filter_visible: false
-    })
-  },
-
-  selectLabel(e) {
-    let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }];
-    const index = e.detail.index
-    time_list[index].type = 'warn';
-    this.setData({
-      select_time_index: index,
+      select_time: time_list[index].text,
       time_list: time_list,
       filter_visible: false
     })
   },
 
   selectSign(e) {
-    let sign_list = [{ text: '不限', value: 0 }, { text: '已签到', value: 1 }, { text: '未签到', value: 2 }]
+    let sign_list = [{ text: '不限', value: 0 }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }]
     const index = e.detail.index
     sign_list[index].type = 'warn'
     console.log(sign_list)
     this.setData({
-      select_sign_index: index,
+      select_sign: sign_list[index].text,
       sign_list: sign_list,
       filter_visible: false
+    })
+  },
+
+  selectLabel(e) {
+    let label_list = this.data.label_list
+    const index = e.target.dataset.index
+    label_list[index].selected = !label_list[index].selected
+    this.setData({
+      label_list: label_list
+    })
+  },
+
+  selectCourse(e) {
+    let course_list = this.data.course_list
+    const index = e.target.dataset.index
+    course_list[index].selected = !course_list[index].selected
+    this.setData({
+      course_list: course_list
+    })
+  },
+
+  onOk(e) {
+    this.setData({
+      filter_visible: false
+    })
+  },
+
+  onReset(e) {
+    this.setData({
+      sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }],
+      time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }],
     })
   }
 })

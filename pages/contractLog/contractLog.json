@@ -1,6 +1,10 @@
 {
   "usingComponents": {
+    "i-card": "../../iviewModule/card/index",
+    "i-avatar": "../../iviewModule/avatar/index",
     "i-row": "../../iviewModule/row/index",
-    "i-col": "../../iviewModule/col/index"
+    "i-col": "../../iviewModule/col/index",
+    "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
+    "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell"
   }
 }

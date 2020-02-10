@@ -1,20 +1,31 @@
 <!--pages/contractLog.wxml-->
 <view>
-  <view>电子合同充值记录</view>
-  <i-row>
-    <i-col span="6" i-class="col-class">操作时间</i-col>
-    <i-col span="6" i-class="col-class">
-      <view style="background-color:gray;color:white">
-        操作课时
+  <mp-cell link url="../index" footer="查看历史合同" >
+  </mp-cell>
+  <view wx:for="{{testJson}}" wx:for-index="idx" style="margin-top: 20rpx; padding: 36rpx 36rpx 36rpx 36rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);" class="i-card">
+    <view class="i-card-header" style="padding: 0 0 40rpx 18rpx;">
+      <view style="background: #1890ff" class="i-class i-avatar i-avatar-circle i-avatar-small">
+        <view class="i-avatar-string">{{item.course_label}}</view>
       </view>
-    </i-col>
-    <i-col span="12" i-class="col-class">操作日志</i-col>
-  </i-row>
-  <view>
+      <view class="i-card-header-content" style="margin-left: 16rpx; font-size: 24rpx;font-weight: bold">
+        {{item.group_name}}
+      </view>
+    </view>
     <i-row>
-      <i-col span="6" i-class="col-class">col-8</i-col>
-      <i-col span="6" i-class="col-class">col-8</i-col>
-      <i-col span="12" i-class="col-class">col-8</i-col>
+      <i-col offset="1" span="8">
+        <view style="font-size: 24rpx;">函授剩余课时</view>
+        <view>
+          <span style="font-size: 44rpx; color: #1890ff;">{{item.remain_class}}</span>
+          <span style="font-size: 20rpx;"> 小时</span>
+        </view>
+      </i-col>
+      <i-col offset="2" span="8">
+        <view style="font-size: 24rpx;">导学剩余课时</view>
+        <view>
+          <span style="font-size: 44rpx; color: #1890ff;">{{item.remain_guide}}</span>
+          <span style="font-size: 20rpx;"> 小时</span>
+        </view>
+      </i-col>
     </i-row>
   </view>
 </view>

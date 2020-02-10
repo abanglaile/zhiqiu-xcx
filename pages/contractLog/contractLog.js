@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    testJson: [
+      { stu_group_id: 432, course_label: 1, group_name: '李承耀-初中数学', remain_class: 2.5, remain_guide: 1.0 },
+      { stu_group_id: 432, course_label: 1, group_name: '李承耀-初中数学', remain_class: 8, remain_guide: 5.0 },
+      { stu_group_id: 432, course_label: 1, group_name: '李承耀-初中数学', remain_class: 2.5, remain_guide: 1.0 },
+    ],
   },
 
   /**
