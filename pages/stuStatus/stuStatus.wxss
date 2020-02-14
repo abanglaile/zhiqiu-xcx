@@ -1,5 +1,6 @@
 /* pages/stuStatus/stuStatus.wxss */
 @import '../../iviewModule/card/index.wxss';
+@import '../../iviewModule/avatar/index.wxss';
 .stu-drawer {
 	width:80vw;
 	height: 100vh;

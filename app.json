@@ -4,7 +4,7 @@
     "pages/logs/logs",
     "pages/authorize/authorize",
     "pages/stuStatus/stuStatus",
-    "pages/contractLog/contractLog",
+    "pages/contract/contract",
     "pages/hourInquire/hourInquire",
     "pages/bond/bond"
   ],

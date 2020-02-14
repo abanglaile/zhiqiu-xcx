@@ -1,4 +1,6 @@
 // pages/stuStatus/stuStatus.js
+
+const moment = require('../../miniprogram_npm/moment/index')
 Page({
 
   /**
@@ -7,37 +9,49 @@ Page({
   data: {
     filter_visible: false,
     select_tab_num: 0,
-    sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }],
-    time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }],
+    sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
+    time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
     label_list: [
-      { text: '函授', index: 0, selected: false }, 
-      { text: '导学', index: 1, selected: false }
+      { text: '函授', label_id: 'class', selected: false }, 
+      { text: '导学', label_id: 'guide', selected: false }
     ],
     course_list: [
-      { text: '语文', id: 0, selected: false },
-      { text: '数学', id: 1, selected: false },
-      { text: '英语', id: 2, selected: false }
+      { text: '语文', course_label: 0, selected: false },
+      { text: '数学', course_label: 1, selected: false },
+      { text: '英语', course_label: 2, selected: false }
     ],
+    select_time: '本周',
+    select_sign: '不限',
 
-    select_time: '全部时间',
-    select_sign: '未上课',
-
-    visible: false,
-    select_time_drawr: false,
-    select_course_draw:false,
-    startDate: '2019-10-10',
-    endDate: '2019-10-10',
-    teacherName: ['全部', '1'],
-    teacherNameIndex: 0,
-    groupName: ['全部', '2'],
-    groupNameIndex: 0,
-    courseName: ['全部', '3'],
-    courseNameIndex: 0,
-    currentTab: 'key1',
-    testJson: [
-      { id: '0', message: '函授', stuName: '李承耀-初中数学', teacherName: '陈冠桥', time: '2019-10-12 10:00-12:00', className: '喜悦昌岗分校-Room1' },
-      { id: '1', message: '函授', stuName: '李承耀-初中数学', teacherName: '陈冠桥', time: '2019-10-12 12:00-12:30', className: '喜悦昌岗分校-Room1' },
-      { id: '2', message: '导学', stuName: '李承耀-初中数学', teacherName: '陈冠桥', time: '2019年10月12日 12:00-12:30', className: '喜悦昌岗分校-Room1' }
+    
+    student_lesson: [
+      {
+        "lesson_time": "2020年02月13日 16:00-18:00",
+        "teacher_name": "叶思翰",
+        "room_name": "room1",
+        "group_name": "陈盈羽-初中数学",
+        "course_label": "1",
+        "label_name": "函授",
+        "course_label_name": "数学"
+      },
+      {
+        "lesson_time": "2020年02月12日 14:00-15:00",
+        "teacher_name": "邓梓君",
+        "room_name": "room1",
+        "group_name": "陈盈羽-初中英语",
+        "course_label": "3",
+        "label_name": "导学",
+        "course_label_name": "英语"
+      },
+      {
+        "lesson_time": "2020年02月11日 14:00-16:00",
+        "teacher_name": "邓梓君",
+        "room_name": "room1",
+        "group_name": "陈盈羽-初中英语",
+        "course_label": "3",
+        "label_name": "函授",
+        "course_label_name": "英语"
+      },
     ],
     all_list: [
       { txt: '已签到', num: 1 },
@@ -62,10 +76,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: "学生课程表"
+    this.setData({
+      loading: true
     })
-    wx.get
+    const start_end_time = this.getStartEndTime(this.data.select_time);
+    let filter_option = {
+      start_time: start_end_time.start_time,
+      end_time: start_end_time.end_time,
+      course_label_list: this.data.course_list.filter(c => c.selected),
+      label_id_list: this.data.label_list.filter(l => l.selected),
+      is_sign: this.data.select_sign == '不限' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
+    }
+    console.log(filter_option);
+    // wx.request({
+    //   url: 'test.php', //仅为示例，并非真实的接口地址
+    //   data: {
+    //     student_id: this.app.global.student_id,
+    //     filter_option: filter_option
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     this.setData({
+    //       loading: false,
+    //       student_lesson: res.data
+    //     })
+    //     console.log(res.data)
+    //   }
+    // })
   },
   
   /**
@@ -183,6 +222,11 @@ Page({
       select_course_draw: !this.data.select_course_draw
     })
   },
+
+
+
+
+
   selectCourse: function(e){
     let index = e.target.dataset['index']
     this.data.testCourseJson[index].selectd = !this.data.testCourseJson[index].selectd
@@ -210,26 +254,34 @@ Page({
     })
   },
 
-  getStudentLesson() {
-    wx.request({
-      url: 'test.php', //仅为示例，并非真实的接口地址
-      data: {
-        select_time: this.data.select_time,
-        select_sign: this.data.select_sign,
-        select_course: this.data.course_list,
-        select_label: this.data.label_list,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data)
-      }
-    })
+  getStartEndTime(text){
+    switch(text){
+      case '本周':
+        return {
+          start_time: moment().startOf('week'),
+          end_time: moment().endOf('week')
+        }
+      case '本月':
+        return {
+          start_time: moment().startOf('month'),
+          end_time: moment().endOf('month').endOf('month')
+        }
+      default:
+        return {
+          start_time: null,
+          end_time: null
+        }
+    }
+  },
+
+  formatLessonTime(start_time, end_time) {
+    start_time = new Date();
+    end_time = new Date();
+    return moment(start_time).format("YYYY-MM-DD HH:mm") + "  -  " + moment(end_time).format("HH:mm");
   },
 
   selectTime(e) {
-    let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }];
+    let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '本月', value: 2 }];
     const index = e.detail.index
     time_list[index].type = 'warn';
     this.setData({
@@ -269,6 +321,13 @@ Page({
     })
   },
 
+  onActionClose(e) {
+    console.log("sssss");
+    this.setData({
+      filter_visible: false
+    })
+  },
+
   onOk(e) {
     this.setData({
       filter_visible: false
@@ -278,7 +337,7 @@ Page({
   onReset(e) {
     this.setData({
       sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }],
-      time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '上一月', value: 4 }],
+      time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '本月', value: 2 }],
     })
   }
 })

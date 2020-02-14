@@ -16,7 +16,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // console.log(app.globalData)
+    this.setData({
+      loading: true
+    })
+    wx.request({
+      url: app.globalData.server_url + '/getStudentGroup',
+      data: {
+        student_id: app.globalData.userid,
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        // console.log(res)
+        if (res.statusCode == 200) {
+          this.setData({
+            loading: false,
+            student_group: res.data
+          })
+        } else {
+          this.setData({
+            loading: false,
+            students: []
+          })
+        }
+      }
+    })
   },
 
   /**

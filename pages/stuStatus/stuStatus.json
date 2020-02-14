@@ -8,6 +8,7 @@
     "i-col": "../../iviewModule/col/index",
     "i-button":"../../iviewModule/button/index",
     "i-load-more": "../../iviewModule/load-more/index",
+    "i-avatar": "../../iviewModule/avatar/index",
     "mp-halfScreenDialog": "../../miniprogram_npm/weui-miniprogram/half-screen-dialog/half-screen-dialog",
     "mp-actionSheet": "../../miniprogram_npm/weui-miniprogram/actionsheet/actionsheet",
     "mp-icon": "../../miniprogram_npm/weui-miniprogram/icon/icon"

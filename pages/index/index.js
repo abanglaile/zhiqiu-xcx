@@ -58,7 +58,7 @@ Page({
   },
   goToContractLog: function (e) {
     wx.navigateTo({
-      url: '../contractLog/contractLog',
+      url: '../contract/contract',
     })
   },
   goToHourInquire: function(e){
