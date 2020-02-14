@@ -215,6 +215,7 @@ Page({
       sign_list: sign_list,
       filter_visible: false
     })
+    getStudentLesson();
   },
 
   selectLabel(e) {
@@ -224,21 +225,18 @@ Page({
     this.setData({
       label_list: label_list
     })
+    getStudentLesson()
   },
 
   selectCourse(e) {
     let course_list = this.data.course_list
     const index = e.target.dataset.index
+    console.log(index, course_list)
     course_list[index].selected = !course_list[index].selected
     this.setData({
       course_list: course_list
     })
-  },
-
-  onActionClose(e) {
-    this.setData({
-      filter_visible: false
-    })
+    getStudentLesson()
   },
 
   onClose(e){
