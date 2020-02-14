@@ -31,6 +31,25 @@ App({
             //
             if(res.data.userid){
               that.globalData.userid = res.data.userid;
+              // 获取绑定学生信息
+              wx.request({
+                url: that.globalData.server_url + '/getBondStudent',
+                data: {
+                  parent_id: that.globalData.userid,
+                },
+                method: 'GET',
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: (res) => {
+                  // console.log(res)
+                  if (res.statusCode == 200) {
+                    that.globalData.students = res.data
+                  } else {
+                    that.globalData.students = []
+                  }
+                }
+              })
             }
             if(res.data.unionid){
               that.globalData.unionid = res.data.unionid;
@@ -97,6 +116,7 @@ App({
     unionid: null,
     userid: null,
     userInfo: null,
+    students: [],
     server_url: "https://www.zhiqiu.pro/api"
     // server_url: "http://127.0.0.1:7001/api" 
   }

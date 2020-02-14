@@ -123,32 +123,35 @@ Page({
   onLoad: function (options) {
     // console.log(app.globalData)
     this.setData({
-      loading: true
+      students: app.globalData.students
     })
-    wx.request({
-      url: app.globalData.server_url + '/getBondStudent',
-      data: {
-        parent_id: app.globalData.userid,
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        // console.log(res)
-        if (res.statusCode == 200) {
-          this.setData({
-            loading: false,
-            students: res.data
-          })
-        } else {
-          this.setData({
-            loading: false,
-            students: []
-          })
-        }  
-      }
-    })
+    // this.setData({
+    //   loading: true
+    // })
+    // wx.request({
+    //   url: app.globalData.server_url + '/getBondStudent',
+    //   data: {
+    //     parent_id: app.globalData.userid,
+    //   },
+    //   method: 'GET',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: (res) => {
+    //     // console.log(res)
+    //     if (res.statusCode == 200) {
+    //       this.setData({
+    //         loading: false,
+    //         students: res.data
+    //       })
+    //     } else {
+    //       this.setData({
+    //         loading: false,
+    //         students: []
+    //       })
+    //     }  
+    //   }
+    // })
   },
 
   /**

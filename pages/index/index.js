@@ -7,7 +7,18 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // tabbar
+    current: 'course'
+  },
+  // tabbar切换函数
+  handleChange ({ detail }) {
+    this.setData({
+      current: detail.key
+    })
+    wx.navigateTo({
+      url: `../${detail.key}/${detail.key}`
+    })
   },
   //事件处理函数
   bindViewTap: function() {
@@ -50,25 +61,25 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },
-  goToStuStatus: function(e) {
-    wx.navigateTo({
-      url: '../stuStatus/stuStatus',
-    })
-  },
-  goToContractLog: function (e) {
-    wx.navigateTo({
-      url: '../contract/contract',
-    })
-  },
-  goToHourInquire: function(e){
-    wx.navigateTo({
-      url: '../hourInquire/hourInquire',
-    })
-  },
-  goToBond: function(e) {
-    wx.navigateTo({
-      url: '../bond/bond',
-    })
   }
+  // goToStuStatus: function(e) {
+  //   wx.navigateTo({
+  //     url: '../stuStatus/stuStatus',
+  //   })
+  // },
+  // goToContractLog: function (e) {
+  //   wx.navigateTo({
+  //     url: '../contractLog/contractLog',
+  //   })
+  // },
+  // goToHourInquire: function(e){
+  //   wx.navigateTo({
+  //     url: '../hourInquire/hourInquire',
+  //   })
+  // },
+  // goToBond: function(e) {
+  //   wx.navigateTo({
+  //     url: '../bond/bond',
+  //   })
+  // }
 })
