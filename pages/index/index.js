@@ -7,18 +7,7 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    // tabbar
-    current: 'course'
-  },
-  // tabbar切换函数
-  handleChange ({ detail }) {
-    this.setData({
-      current: detail.key
-    })
-    wx.navigateTo({
-      url: `../${detail.key}/${detail.key}`
-    })
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
   bindViewTap: function() {
@@ -61,25 +50,15 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  test () {
+    wx.switchTab({
+      url: '../stuStatus/stuStatus'
+    })
   }
-  // goToStuStatus: function(e) {
-  //   wx.navigateTo({
-  //     url: '../stuStatus/stuStatus',
-  //   })
-  // },
-  // goToContractLog: function (e) {
-  //   wx.navigateTo({
-  //     url: '../contractLog/contractLog',
-  //   })
-  // },
   // goToHourInquire: function(e){
   //   wx.navigateTo({
   //     url: '../hourInquire/hourInquire',
-  //   })
-  // },
-  // goToBond: function(e) {
-  //   wx.navigateTo({
-  //     url: '../bond/bond',
   //   })
   // }
 })

@@ -1,6 +1,4 @@
 {
   "usingComponents": {
-    "i-tab-bar": "../../iviewModule/tab-bar/index",
-    "i-tab-bar-item": "../../iviewModule/tab-bar-item/index"
   }
 }

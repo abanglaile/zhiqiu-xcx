@@ -118,6 +118,6 @@ App({
     userInfo: null,
     students: [],
     server_url: "https://www.zhiqiu.pro/api"
-    // server_url: "http://127.0.0.1:7001/api" 
+    // server_url: "http://127.0.0.1:7001/api"
   }
 })

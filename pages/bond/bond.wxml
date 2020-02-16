@@ -1,5 +1,3 @@
-<!--pages/contractLog.wxml-->
-
 <i-panel title="已绑定">
   <i-cell-group>
     <i-cell title="新增绑定" is-link bind:click="onAddStudent">

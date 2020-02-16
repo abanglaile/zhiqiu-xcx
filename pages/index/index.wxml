@@ -7,23 +7,4 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <!-- <view class="usermotto" bindtap='goToStuStatus'>
-    <text class="user-motto">{{motto}}</text>
-  </view>
-  <view bindtap='goToContractLog'>
-    <text class="user-motto">goToContractLog</text>  
-  </view>
-  <view bindtap='goToHourInquire'>
-    <text class="user-motto">goToHourInquire</text>  
-  </view>
-  <view bindtap='goToBond'>
-    <text class="user-motto">goToBond</text>  
-  </view> -->
-  <view class="tabbar">
-    <i-tab-bar current="{{ current }}" bindchange="handleChange" fixed>
-      <i-tab-bar-item key="stuStatus" icon="activity" current-icon="activity_fill" title="课程"></i-tab-bar-item>
-      <i-tab-bar-item key="contractLog" icon="document" current-icon="document_fill" title="合同"></i-tab-bar-item>
-      <i-tab-bar-item key="bond" icon="businesscard" current-icon="businesscard_fill" title="我的"></i-tab-bar-item>
-    </i-tab-bar>
-  </view>
 </view>
