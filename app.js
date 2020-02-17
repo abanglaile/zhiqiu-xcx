@@ -71,7 +71,7 @@ App({
               console.log("globalData step1:",JSON.stringify(this.globalData))
               wx.switchTab({
                 // url: '/pages/index/index',
-                url: '../stuStatus/stuStatus'
+                url: '../lesson/lesson'
               })
               // 可以将 res 发送给后台解码出 unionId
               // wx.request({

@@ -3,7 +3,7 @@
     <i-cell title="新增绑定" is-link bind:click="onAddStudent">
       <i-icon slot="icon" type="addressbook_fill" size="28" color="#5cadff"/>
     </i-cell>
-    <i-cell wx:for="{{ students }}" wx:key="userid" title="{{ item.realname }}" is-link bind:click="onTapStudent">
+    <i-cell wx:for="{{ students }}" wx:key="userid" title="{{ item.realname }}" bind:click="onTapStudent">
       <i-avatar slot="icon" src="{{ item.avatar }}" size="default"></i-avatar>
     </i-cell>
   </i-cell-group>

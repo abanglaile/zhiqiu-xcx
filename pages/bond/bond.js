@@ -35,7 +35,7 @@ Page({
         loading: true
       })
       wx.request({
-        url: app.globalData.server_url + '/parentBond',
+        url: app.globalData.server_url + '/parent',
         data: {
           parent_id: app.globalData.userid,
           student_id: this.data.userFromCode.userid,
@@ -61,7 +61,7 @@ Page({
             'visible.modal': false
           })
           // 成功后刷新绑定信息
-          this.onLoad()
+          this.onApiGetStudents()
         },
         fail: (res) => {
           $Toast({
@@ -116,6 +116,36 @@ Page({
       }
     })
   },
+  onApiGetStudents: function () {
+    this.setData({
+      loading: true
+    })
+    wx.request({
+      url: app.globalData.server_url + '/getBondStudent',
+      data: {
+        parent_id: app.globalData.userid,
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        // console.log(res)
+        if (res.statusCode == 200) {
+          this.setData({
+            loading: false,
+            students: res.data
+          })
+          app.globalData.students = res.data
+        } else {
+          this.setData({
+            loading: false,
+            students: []
+          })
+        }  
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -125,33 +155,6 @@ Page({
     this.setData({
       students: app.globalData.students
     })
-    // this.setData({
-    //   loading: true
-    // })
-    // wx.request({
-    //   url: app.globalData.server_url + '/getBondStudent',
-    //   data: {
-    //     parent_id: app.globalData.userid,
-    //   },
-    //   method: 'GET',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: (res) => {
-    //     // console.log(res)
-    //     if (res.statusCode == 200) {
-    //       this.setData({
-    //         loading: false,
-    //         students: res.data
-    //       })
-    //     } else {
-    //       this.setData({
-    //         loading: false,
-    //         students: []
-    //       })
-    //     }  
-    //   }
-    // })
   },
 
   /**
