@@ -37,13 +37,14 @@
     <view slot="desc">
       <view style="font-size: 30rpx; margin: 20rpx 0 20rpx 0;">授课方式</view>
       <view>
-        <button data-index="{{item.index}}" size="mini" class="{{item.selected ? 'filter-btn-select' : 'filter-btn'}}" 
+        <button data-index="{{index}}" size="mini" class="{{item.selected ? 'filter-btn-select' : 'filter-btn'}}" 
           wx:for="{{label_list}}"
+          wx:for-index="index"
           bindtap="selectLabel">{{item.text}}</button>
       </view>
       <view style="font-size: 30rpx; margin: 20rpx 0 20rpx 0;">科目</view>
       <view>     
-        <button data-index="{{item.id}}" size="mini" class="{{item.selected ? 'filter-btn-select' : 'filter-btn'}}" 
+        <button data-index="{{index}}" size="mini" class="{{item.selected ? 'filter-btn-select' : 'filter-btn'}}" 
           wx:for="{{course_list}}"
           bindtap="selectCourse">{{item.text}}</button>
       </view>
@@ -51,11 +52,11 @@
   </mp-halfScreenDialog>
   <view wx:for="{{student_lesson}}" wx:for-index="idx" wx:key="id" style="padding: 6px 0 0 0;">
     <view class="i-card">
-      <view class="i-card-header" style="padding: 8px 16px;">
-        <view style="background: #1890ff; margin-right: 12rpx" class="i-class i-avatar i-avatar-circle i-avatar-small">
+      <view class="i-card-header" style="padding: 12px 18px;">
+        <!-- <view style="background: #1890ff; margin-right: 20rpx" class="i-class i-avatar i-avatar-circle i-avatar-small">
           <view class="i-avatar-string">英</view>
-        </view>
-        <view class="i-card-header-content" style="font-size:14px;">
+        </view> -->
+        <view class="i-card-header-content" style="font-size:15px">
           {{item.group_name}}
         </view>
         <view class="i-card-header-extra">

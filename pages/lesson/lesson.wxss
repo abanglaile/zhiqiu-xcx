@@ -2,11 +2,6 @@
 @import '../../iviewModule/card/index.wxss';
 @import '../../iviewModule/avatar/index.wxss';
 
-/* .filterList-box{
-  padding-top: 1rem;
-  background: #fff;
-} */
-/* ---------------------------------- */
 .sort-list{
   justify-content: space-around;
   display: flex;
@@ -23,7 +18,7 @@
   text-align: center;
   /* margin: auto 0; */
   height: 100%;
-  font-size: 25rpx;
+  font-size: 28rpx;
   line-height: 70rpx;
   /* border-right: 1rpx solid #ECECEC;  */
   flex: 1;

@@ -12,13 +12,19 @@ Page({
     sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
     time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
     label_list: [
-      { text: '函授', label_id: 'class', selected: false }, 
-      { text: '导学', label_id: 'guide', selected: false }
+      { text: '函授', label_id: 'class', selected: true }, 
+      { text: '导学', label_id: 'guide', selected: true }
     ],
     course_list: [
-      { text: '语文', course_label: 0, selected: false },
-      { text: '数学', course_label: 1, selected: false },
-      { text: '英语', course_label: 2, selected: false }
+      { text: '数学', course_label: 1, selected: true },
+      { text: '音乐', course_label: 2, selected: true },
+      { text: '英语', course_label: 3, selected: true },
+      { text: '物理', course_label: 4, selected: true },
+      { text: '化学', course_label: 5, selected: true },
+      { text: '地理', course_label: 6, selected: true },
+      { text: '语文', course_label: 7, selected: true },
+      { text: '政治', course_label: 8, selected: true },
+      { text: '历史', course_label: 9, selected: true }
     ],
     select_time: '本周',
     select_sign: '不限',
@@ -168,7 +174,7 @@ Page({
       label_id_list: this.data.label_list.filter(l => l.selected),
       is_sign: this.data.select_sign == '不限' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
-    console.log(filter_option);
+    console.log(JSON.stringify(filter_option));
     // wx.request({
     //   url: 'test.php', //仅为示例，并非真实的接口地址
     //   data: {
@@ -221,11 +227,12 @@ Page({
   selectLabel(e) {
     let label_list = this.data.label_list
     const index = e.target.dataset.index
+    console.log(index, label_list)
     label_list[index].selected = !label_list[index].selected
     this.setData({
       label_list: label_list
     })
-    getStudentLesson()
+    this.getStudentLesson()
   },
 
   selectCourse(e) {
@@ -236,7 +243,7 @@ Page({
     this.setData({
       course_list: course_list
     })
-    getStudentLesson()
+    this.getStudentLesson()
   },
 
   onClose(e){
@@ -254,8 +261,25 @@ Page({
 
   onReset(e) {
     this.setData({
-      sign_list: [{ text: '不限', value: 0, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }],
-      time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '本月', value: 2 }],
+      sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
+      time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
+      label_list: [
+        { text: '函授', label_id: 'class', selected: true },
+        { text: '导学', label_id: 'guide', selected: true }
+      ],
+      course_list: [
+        { text: '数学', course_label: 1, selected: true },
+        { text: '音乐', course_label: 2, selected: true },
+        { text: '英语', course_label: 3, selected: true },
+        { text: '物理', course_label: 4, selected: true },
+        { text: '化学', course_label: 5, selected: true },
+        { text: '地理', course_label: 6, selected: true },
+        { text: '语文', course_label: 7, selected: true },
+        { text: '政治', course_label: 8, selected: true },
+        { text: '历史', course_label: 9, selected: true }
+      ],
+      select_time: '本周',
+      select_sign: '不限',
     })
   }
 })

@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/authorize/authorize",
-    "pages/stuStatus/stuStatus",
+    "pages/lesson/lesson",
     "pages/contract/contract",
     "pages/hourInquire/hourInquire",
     "pages/bond/bond"

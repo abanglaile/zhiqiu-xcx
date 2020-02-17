@@ -5,10 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    testJson: [
-      { stu_group_id: 432, course_label: 1, group_name: '李承耀-初中数学', remain_class: 2.5, remain_guide: 1.0 },
-      { stu_group_id: 432, course_label: 1, group_name: '李承耀-初中数学', remain_class: 8, remain_guide: 5.0 },
-      { stu_group_id: 432, course_label: 1, group_name: '李承耀-初中数学', remain_class: 2.5, remain_guide: 1.0 },
+    student_group: [
+      {
+        "course_label": "3",
+        "stu_group_id": 493,
+        "group_name": "陈盈羽-初中英语",
+        "remain_class": -240,
+        "remain_guide": -60
+      },
+      {
+        "course_label": "1",
+        "stu_group_id": 494,
+        "group_name": "陈盈羽-初中数学",
+        "remain_class": -240,
+        "remain_guide": -60
+      }
     ],
   },
 
@@ -17,33 +28,33 @@ Page({
    */
   onLoad: function (options) {
     // console.log(app.globalData)
-    this.setData({
-      loading: true
-    })
-    wx.request({
-      url: app.globalData.server_url + '/getStudentGroup',
-      data: {
-        student_id: app.globalData.userid,
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        // console.log(res)
-        if (res.statusCode == 200) {
-          this.setData({
-            loading: false,
-            student_group: res.data
-          })
-        } else {
-          this.setData({
-            loading: false,
-            students: []
-          })
-        }
-      }
-    })
+    // this.setData({
+    //   loading: true
+    // })
+    // wx.request({
+    //   url: app.globalData.server_url + '/getStudentGroup',
+    //   data: {
+    //     student_id: app.globalData.userid,
+    //   },
+    //   method: 'GET',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: (res) => {
+    //     // console.log(res)
+    //     if (res.statusCode == 200) {
+    //       this.setData({
+    //         loading: false,
+    //         student_group: res.data
+    //       })
+    //     } else {
+    //       this.setData({
+    //         loading: false,
+    //         student_group: []
+    //       })
+    //     }
+    //   }
+    // })
   },
 
   /**

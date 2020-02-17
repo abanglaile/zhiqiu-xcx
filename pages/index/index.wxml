@@ -21,8 +21,8 @@
   </view> -->
   <view class="tabbar">
     <i-tab-bar current="{{ current }}" bindchange="handleChange" fixed>
-      <i-tab-bar-item key="stuStatus" icon="activity" current-icon="activity_fill" title="课程"></i-tab-bar-item>
-      <i-tab-bar-item key="contractLog" icon="document" current-icon="document_fill" title="合同"></i-tab-bar-item>
+      <i-tab-bar-item key="lesson" icon="activity" current-icon="activity_fill" title="课程"></i-tab-bar-item>
+      <i-tab-bar-item key="contract" icon="document" current-icon="document_fill" title="合同"></i-tab-bar-item>
       <i-tab-bar-item key="bond" icon="businesscard" current-icon="businesscard_fill" title="我的"></i-tab-bar-item>
     </i-tab-bar>
   </view>

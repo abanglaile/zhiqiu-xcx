@@ -1,13 +1,72 @@
 <!--pages/contractLog.wxml-->
+<wxs module="util">
+var getAvatarText = function(course_label) {
+  switch (course_label) {
+    case '1':
+      //ava_color = '#28b6b6';
+      //return ava_background = '#98ebe2';
+      return text = '数';
+    case '2':
+      //ava_color = '#fef001';
+      //return ava_background = '#fcffa1';
+      return text = '乐''';
+    case '3':
+      //ava_color = '#f56a00';
+      //return ava_background = '#fde3cf';
+      return text = '英';
+    case '4':
+      //ava_color = '#0ebec4';
+      //return ava_background = '#99fff5';
+      return text = '物';
+    case '5':
+      //ava_color = '#3162e5';
+      //return ava_background = '#b0cdff';
+      return text = '化';
+    case '6':
+      //ava_color = '#eece2e';
+      //return ava_background = '#fff9ab';
+      return text = '地';
+    case '7':
+      //ava_color = '#ff9918';
+      //return ava_background = '#ffda91';
+      return text = '语';
+      break;
+    case '8':
+      //ava_color = '#ff4640';
+      //return ava_background = '#ffc3ba';
+      return text = '政';
+      break;
+    case '9':
+      //ava_color = '#d4b22a';
+      //return ava_background = '#edde7b';
+      return text = '史';
+      break;
+    case '10':
+      //ava_color = '#28d900';
+      //return ava_background = '#c8ffab';
+      return text = '生';
+      break;
+    default:
+      break;
+  }
+}
+
+var toFixed = function(num, bit){
+  return num.toFixed(bit);
+}
+module.exports.getAvatarText = getAvatarText;
+module.exports.toFixed = toFixed;
+</wxs>
+
 <view>
   <mp-cell link url="../index" footer="查看历史合同" >
   </mp-cell>
-  <view wx:for="{{testJson}}" wx:for-index="idx" style="margin-top: 20rpx; padding: 36rpx 36rpx 36rpx 36rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);" class="i-card">
+  <view wx:for="{{student_group}}" wx:for-index="idx" style="margin-top: 20rpx; padding: 36rpx 36rpx 36rpx 36rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);" class="i-card">
     <view class="i-card-header" style="padding: 0 0 40rpx 18rpx;">
-      <view style="background: #1890ff" class="i-class i-avatar i-avatar-circle i-avatar-small">
-        <view class="i-avatar-string">{{item.course_label}}</view>
+      <view style="background: #1890ff;" class="i-class i-avatar i-avatar-circle i-avatar-small">
+        <view class="i-avatar-string">{{util.getAvatarText(item.course_label)}}</view>
       </view>
-      <view class="i-card-header-content" style="margin-left: 16rpx; font-size: 24rpx;font-weight: bold">
+      <view class="i-card-header-content" style="margin-left: 16rpx; font-size: 30rpx;font-weight: bold">
         {{item.group_name}}
       </view>
     </view>
@@ -15,14 +74,14 @@
       <i-col offset="1" span="8">
         <view style="font-size: 24rpx;">函授剩余课时</view>
         <view>
-          <span style="font-size: 44rpx; color: #1890ff;">{{item.remain_class}}</span>
+          <span style="font-size: 44rpx; color: #1890ff;">{{util.toFixed(item.remain_class/60, 1)}}</span>
           <span style="font-size: 20rpx;"> 小时</span>
         </view>
       </i-col>
       <i-col offset="2" span="8">
         <view style="font-size: 24rpx;">导学剩余课时</view>
         <view>
-          <span style="font-size: 44rpx; color: #1890ff;">{{item.remain_guide}}</span>
+          <span style="font-size: 44rpx; color: #1890ff;">{{util.toFixed(item.remain_guide/60, 1)}}</span>
           <span style="font-size: 20rpx;"> 小时</span>
         </view>
       </i-col>

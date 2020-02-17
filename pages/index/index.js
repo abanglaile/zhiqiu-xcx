@@ -9,7 +9,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     // tabbar
-    current: 'course'
+    current: 'lesson'
   },
   // tabbar切换函数
   handleChange ({ detail }) {
