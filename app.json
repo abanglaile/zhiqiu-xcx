@@ -14,5 +14,31 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#bbbec4",
+    "selectedColor": "#495060",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/lesson/lesson",
+        "text": "课程",
+        "iconPath": "/images/course.png",
+        "selectedIconPath": "/images/course_fill.png"
+      },
+      {
+        "pagePath": "pages/contract/contract",
+        "text": "合同",
+        "iconPath": "/images/contract.png",
+        "selectedIconPath": "/images/contract_fill.png"
+      },
+      {
+        "pagePath": "pages/bond/bond",
+        "text": "我的",
+        "iconPath": "/images/user.png",
+        "selectedIconPath": "/images/user_fill.png"
+      }
+    ]
+  }
 }

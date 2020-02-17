@@ -1,0 +1,12 @@
+<view class="tabbar">
+    <i-tab-bar current="{{ current }}" bindchange="handleChange">
+        <i-tab-bar-item
+            wx:for="{{ datas }}"
+            wx:key="key"
+            key="{{ item.value }}"
+            icon="{{ item.icon }}"
+            current-icon="{{ item.iconActive }}"
+            title="{{ item.label }}">
+        </i-tab-bar-item>
+    </i-tab-bar>
+</view>
