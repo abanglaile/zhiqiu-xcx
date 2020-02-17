@@ -75,7 +75,8 @@ Page({
           console.log("小程序登录用户信息成功！");
           //授权成功后，跳转进入小程序首页(正式环境应该在这里)
           wx.switchTab({
-            url: '/pages/index/index'
+            // url: '/pages/index/index'
+            url: '../stuStatus/stuStatus'
           })
         }
       }

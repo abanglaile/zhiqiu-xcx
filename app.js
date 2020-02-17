@@ -69,8 +69,9 @@ App({
             success: res => {
               this.globalData.userInfo = res.userInfo
               console.log("globalData step1:",JSON.stringify(this.globalData))
-              wx.reLaunch({
-                url: '/pages/index/index',
+              wx.switchTab({
+                // url: '/pages/index/index',
+                url: '../stuStatus/stuStatus'
               })
               // 可以将 res 发送给后台解码出 unionId
               // wx.request({
