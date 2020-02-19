@@ -40,6 +40,9 @@
   color: #8c8c8c;
   margin: 0 30rpx 0 0;
 }
+button[size=mini] {
+  padding: 0 30rpx;
+}
 .unfold{
   transform: rotate(90deg);
   margin-left: 8rpx;
