@@ -1,8 +1,9 @@
 // pages/stuStatus/stuStatus.js
 
 const moment = require('../../miniprogram_npm/moment/index')
-Page({
+const app = getApp()
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -31,40 +32,40 @@ Page({
 
     
     student_lesson: [
-      {
-        "lesson_time": "2020年02月13日 16:00-18:00",
-        "teacher_name": "叶思翰",
-        "room_name": "room1",
-        "group_name": "陈盈羽-初中数学",
-        "course_label": "1",
-        "label_name": "函授",
-        "course_label_name": "数学"
-      },
-      {
-        "lesson_time": "2020年02月12日 14:00-15:00",
-        "teacher_name": "邓梓君",
-        "room_name": "room1",
-        "group_name": "陈盈羽-初中英语",
-        "course_label": "3",
-        "label_name": "导学",
-        "course_label_name": "英语"
-      },
-      {
-        "lesson_time": "2020年02月11日 14:00-16:00",
-        "teacher_name": "邓梓君",
-        "room_name": "room1",
-        "group_name": "陈盈羽-初中英语",
-        "course_label": "3",
-        "label_name": "函授",
-        "course_label_name": "英语"
-      },
+      // {
+      //   "lesson_time": "2020年02月13日 16:00-18:00",
+      //   "teacher_name": "叶思翰",
+      //   "room_name": "room1",
+      //   "group_name": "陈盈羽-初中数学",
+      //   "course_label": "1",
+      //   "label_name": "函授",
+      //   "course_label_name": "数学"
+      // },
+      // {
+      //   "lesson_time": "2020年02月12日 14:00-15:00",
+      //   "teacher_name": "邓梓君",
+      //   "room_name": "room1",
+      //   "group_name": "陈盈羽-初中英语",
+      //   "course_label": "3",
+      //   "label_name": "导学",
+      //   "course_label_name": "英语"
+      // },
+      // {
+      //   "lesson_time": "2020年02月11日 14:00-16:00",
+      //   "teacher_name": "邓梓君",
+      //   "room_name": "room1",
+      //   "group_name": "陈盈羽-初中英语",
+      //   "course_label": "3",
+      //   "label_name": "函授",
+      //   "course_label_name": "英语"
+      // },
     ],
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    getStudentLesson();
+    this.getStudentLesson();
   },
   
   /**
@@ -162,10 +163,7 @@ Page({
     }
   },
 
-  getStudentLesson(){
-    this.setData({
-      loading: true
-    })
+  getStudentLesson: function () {
     const start_end_time = this.getStartEndTime(this.data.select_time);
     let filter_option = {
       start_time: start_end_time.start_time,
@@ -174,24 +172,30 @@ Page({
       label_id_list: this.data.label_list.filter(l => l.selected),
       is_sign: this.data.select_sign == '不限' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
-    console.log(JSON.stringify(filter_option));
-    // wx.request({
-    //   url: 'test.php', //仅为示例，并非真实的接口地址
-    //   data: {
-    //     student_id: this.app.global.student_id,
-    //     filter_option: filter_option
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     this.setData({
-    //       loading: false,
-    //       student_lesson: res.data
-    //     })
-    //     console.log(res.data)
-    //   }
-    // })
+    // console.log(JSON.stringify(filter_option));
+    if (app.globalData.students.length > 0) {
+      this.setData({
+        loading: true
+      })
+      wx.request({
+        url: app.globalData.server_url + '/getStudentLesson', //仅为示例，并非真实的接口地址
+        data: {
+          student_id: app.globalData.students[0].userid,
+          filter_option: filter_option
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: (res) => {
+          this.setData({
+            loading: false,
+            student_lesson: res.data
+          })
+          console.log(res.data)
+        }
+      })
+    }
   },
 
   formatLessonTime(start_time, end_time) {
@@ -221,7 +225,7 @@ Page({
       sign_list: sign_list,
       filter_visible: false
     })
-    getStudentLesson();
+    this.getStudentLesson();
   },
 
   selectLabel(e) {
@@ -256,7 +260,7 @@ Page({
     this.setData({
       filter_visible: false
     })
-    getStudentLesson();
+    this.getStudentLesson();
   },
 
   onReset(e) {

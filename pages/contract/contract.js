@@ -1,4 +1,6 @@
 // pages/contractLog.js
+const app = getApp()
+
 Page({
 
   /**
@@ -6,20 +8,20 @@ Page({
    */
   data: {
     student_group: [
-      {
-        "course_label": "3",
-        "stu_group_id": 493,
-        "group_name": "陈盈羽-初中英语",
-        "remain_class": -240,
-        "remain_guide": -60
-      },
-      {
-        "course_label": "1",
-        "stu_group_id": 494,
-        "group_name": "陈盈羽-初中数学",
-        "remain_class": -240,
-        "remain_guide": -60
-      }
+      // {
+      //   "course_label": "3",
+      //   "stu_group_id": 493,
+      //   "group_name": "陈盈羽-初中英语",
+      //   "remain_class": -240,
+      //   "remain_guide": -60
+      // },
+      // {
+      //   "course_label": "1",
+      //   "stu_group_id": 494,
+      //   "group_name": "陈盈羽-初中数学",
+      //   "remain_class": -240,
+      //   "remain_guide": -60
+      // }
     ],
   },
 
@@ -28,33 +30,35 @@ Page({
    */
   onLoad: function (options) {
     // console.log(app.globalData)
-    // this.setData({
-    //   loading: true
-    // })
-    // wx.request({
-    //   url: app.globalData.server_url + '/getStudentGroup',
-    //   data: {
-    //     student_id: app.globalData.userid,
-    //   },
-    //   method: 'GET',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   success: (res) => {
-    //     // console.log(res)
-    //     if (res.statusCode == 200) {
-    //       this.setData({
-    //         loading: false,
-    //         student_group: res.data
-    //       })
-    //     } else {
-    //       this.setData({
-    //         loading: false,
-    //         student_group: []
-    //       })
-    //     }
-    //   }
-    // })
+    if (app.globalData.students.length > 0) {
+      this.setData({
+        loading: true
+      })
+      wx.request({
+        url: app.globalData.server_url + '/getStudentGroup',
+        data: {
+          student_id: app.globalData.students[0].userid,
+        },
+        method: 'GET',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: (res) => {
+          // console.log(res)
+          if (res.statusCode == 200) {
+            this.setData({
+              loading: false,
+              student_group: res.data
+            })
+          } else {
+            this.setData({
+              loading: false,
+              student_group: []
+            })
+          }
+        }
+      })
+    }   
   },
 
   /**
