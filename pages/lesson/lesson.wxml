@@ -3,15 +3,15 @@
 <view>
 
   <view class="sort-list">
-    <view class="sort" data-num="1" bindtap="selectTab">
+    <view class="sort" mark:num="1" bindtap="selectTab">
       {{select_sign}}
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
     </view>
-    <view class="sort" data-num="3" bindtap="selectTab">
+    <view class="sort" mark:num="3" bindtap="selectTab">
       课程类型
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
     </view>
-    <view class="sort" data-num="2" bindtap="selectTab">
+    <view class="sort" mark:num="2" bindtap="selectTab">
       {{select_time}}
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
     </view>
@@ -31,6 +31,7 @@
     show="{{(select_tab_num == 3 && filter_visible)}}"
     maskClosable="false"
     close="onClose"
+    bindbuttontap="buttontap"
     buttons="{{[{type: 'default', text: '重置', value: 0}, {type: 'primary', text: '确定', value: 1}]}}"
   >
     <view slot="title">选择课程</view>

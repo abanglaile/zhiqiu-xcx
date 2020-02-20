@@ -11,7 +11,7 @@ Page({
     filter_visible: false,
     select_tab_num: 0,
     sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
-    time_list: [{ text: '全部时间', value: 0, type: 'warn' }, { text: '本周', value: 1 }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
+    time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
     label_list: [
       { text: '函授', label_id: 'class', selected: true }, 
       { text: '导学', label_id: 'guide', selected: true }
@@ -139,7 +139,7 @@ Page({
     console.log(e)
     this.setData({
       filter_visible: !this.data.filter_visible,
-      select_tab_num: e.target.dataset.num
+      select_tab_num: e.mark.num
     })
   },
 
@@ -172,15 +172,16 @@ Page({
       label_id_list: this.data.label_list.filter(l => l.selected),
       is_sign: this.data.select_sign == '不限' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
-    // console.log(JSON.stringify(filter_option));
-    if (app.globalData.students.length > 0) {
+    console.log(JSON.stringify(filter_option));
+    if (true || app.globalData.students.length > 0) {
       this.setData({
         loading: true
       })
       wx.request({
         url: app.globalData.server_url + '/getStudentLesson', //仅为示例，并非真实的接口地址
         data: {
-          student_id: app.globalData.students[0].userid,
+          //student_id: app.globalData.students[0].userid,
+          student_id: 'd77412a04cc811eab8d775ec7f1ac387',
           filter_option: filter_option
         },
         method: 'POST',
@@ -192,6 +193,13 @@ Page({
             loading: false,
             student_lesson: res.data
           })
+          console.log(res.data)
+        },
+        fail: (res) => {
+          $Toast({
+            content: '获取课程数据',
+            type: 'error'
+          });
           console.log(res.data)
         }
       })
@@ -213,6 +221,7 @@ Page({
       time_list: time_list,
       filter_visible: false
     })
+    this.getStudentLesson()
   },
 
   selectSign(e) {
@@ -225,7 +234,7 @@ Page({
       sign_list: sign_list,
       filter_visible: false
     })
-    this.getStudentLesson();
+    this.getStudentLesson()
   },
 
   selectLabel(e) {
@@ -236,7 +245,7 @@ Page({
     this.setData({
       label_list: label_list
     })
-    this.getStudentLesson()
+    // this.getStudentLesson()
   },
 
   selectCourse(e) {
@@ -247,7 +256,7 @@ Page({
     this.setData({
       course_list: course_list
     })
-    this.getStudentLesson()
+    // this.getStudentLesson()
   },
 
   onClose(e){
@@ -256,34 +265,36 @@ Page({
     })
   },
 
-  onOk(e) {
-    this.setData({
-      filter_visible: false
-    })
+  buttontap(e) {
+    console.log(e.detail)
+    if(e.detail.index == 1){
+      this.setData({
+        filter_visible: false
+      })  
+    }else{
+      this.setData({
+        sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
+        time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
+        label_list: [
+          { text: '函授', label_id: 'class', selected: true },
+          { text: '导学', label_id: 'guide', selected: true }
+        ],
+        course_list: [
+          { text: '数学', course_label: 1, selected: true },
+          { text: '音乐', course_label: 2, selected: true },
+          { text: '英语', course_label: 3, selected: true },
+          { text: '物理', course_label: 4, selected: true },
+          { text: '化学', course_label: 5, selected: true },
+          { text: '地理', course_label: 6, selected: true },
+          { text: '语文', course_label: 7, selected: true },
+          { text: '政治', course_label: 8, selected: true },
+          { text: '历史', course_label: 9, selected: true }
+        ],
+        select_time: '本周',
+        select_sign: '不限',
+      })
+    }
     this.getStudentLesson();
   },
 
-  onReset(e) {
-    this.setData({
-      sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
-      time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
-      label_list: [
-        { text: '函授', label_id: 'class', selected: true },
-        { text: '导学', label_id: 'guide', selected: true }
-      ],
-      course_list: [
-        { text: '数学', course_label: 1, selected: true },
-        { text: '音乐', course_label: 2, selected: true },
-        { text: '英语', course_label: 3, selected: true },
-        { text: '物理', course_label: 4, selected: true },
-        { text: '化学', course_label: 5, selected: true },
-        { text: '地理', course_label: 6, selected: true },
-        { text: '语文', course_label: 7, selected: true },
-        { text: '政治', course_label: 8, selected: true },
-        { text: '历史', course_label: 9, selected: true }
-      ],
-      select_time: '本周',
-      select_sign: '不限',
-    })
-  }
 })
