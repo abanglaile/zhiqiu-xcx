@@ -14,7 +14,7 @@
   <i-panel wx:if="{{ visible.alert }}" hide-border="{{ true }}">
     <view class="alert"><i-icon type="prompt" />无效验证码</view>
   </i-panel>
-  <i-cell wx:if="{{ visible.preview }}" title="{{ userFromCode.realname }}" is-link bind:click="onApiParentBond">
+  <i-cell wx:if="{{ visible.preview }}" title="{{ userFromCode.realname }}" is-link bind:click="onApiParentBond" label="点击绑定">
     <i-avatar slot="icon" src="{{ userFromCode.avatar }}" size="default"></i-avatar>
   </i-cell>
   <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>

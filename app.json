@@ -1,9 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/lesson/lesson",
     "pages/logs/logs",
     "pages/authorize/authorize",
-    "pages/lesson/lesson",
     "pages/contract/contract",
     "pages/hourInquire/hourInquire",
     "pages/bond/bond"

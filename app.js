@@ -48,6 +48,11 @@ App({
                   } else {
                     that.globalData.students = []
                   }
+                  if (that.globalData.students.length == 0) {
+                    wx.switchTab({
+                      url: '../bond/bond'
+                    })
+                  }
                 }
               })
             }
