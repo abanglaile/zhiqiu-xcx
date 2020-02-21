@@ -1,0 +1,21 @@
+<view class="wrapper">
+  <image class="logo" src="{{ my.avatarUrl }}" alt="知秋" />
+  <view class="discription">{{ my.nickName }}</view>
+  <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec"></i-divider>
+
+  <!-- <i-grid class="grid">
+    <i-grid-item>
+      <i-grid-icon>
+        <i-icon type="group" />
+      </i-grid-icon>
+      <i-grid-label>绑定</i-grid-label>
+    </i-grid-item>
+    <i-grid-item>Grid</i-grid-item>
+    <i-grid-item>Grid</i-grid-item>
+  </i-grid> -->
+
+  <view class="grid">
+    <i-button bind:click="onOpenBond" type="primary">学生管理</i-button>
+  </view>
+  
+</view>

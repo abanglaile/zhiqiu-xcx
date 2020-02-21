@@ -1,5 +1,5 @@
 // pages/bond.js
-const { $Toast } = require('../../iviewModule/base/index')
+const { $Message } = require('../../iviewModule/base/index')
 const app = getApp()
 
 Page({
@@ -9,75 +9,53 @@ Page({
    */
   data: {
     visible: {
-      'modal': false,
-      'alert': false,
-      'preview': false
+      alert: false,
+      card: false
     },
     loading: false,
     code: '',
-    students: [],
-    userFromCode: null
+    user: null
   },
 
   onTapStudent: function (data) {},
-  onAddStudent: function () {
+  onApiParentBond: function (event) {
     this.setData({
-      code: '',
-      userFromCode: null,
-      'visible.preview': false,
-      'visible.alert': false,
-      'visible.modal': true
+      loading: true
     })
-  },
-  onApiParentBond: function () {
-    if (this.data.userFromCode) {
-      this.setData({
-        loading: true
-      })
-      wx.request({
-        url: app.globalData.server_url + '/parent',
-        data: {
-          parent_id: app.globalData.userid,
-          student_id: this.data.userFromCode.userid,
-          wx_info: {
-            openid: app.globalData.openid,
-            unionid: app.globalData.unionid,
-            nickname: app.globalData.userInfo.nickName,
-            imgurl: app.globalData.userInfo.avatarUrl
-          }
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/json'
-        },
-        success: (res) => {
-          $Toast({
-            content: res.data.msg,
-            image: this.data.userFromCode.avatar
-          })
-          app.globalData.userid = res.data.userid
-          this.setData({
-            loading: false,
-            'visible.modal': false
-          })
-          // 成功后刷新绑定信息
-          this.onApiGetStudents()
-        },
-        fail: (res) => {
-          $Toast({
-            content: '绑定失败',
-            type: 'error'
-          });
+    wx.request({
+      url: app.globalData.server_url + '/parent',
+      data: {
+        parent_id: app.globalData.userid,
+        student_id: event.mark.id,
+        wx_info: {
+          openid: app.globalData.openid,
+          unionid: app.globalData.unionid,
+          nickname: app.globalData.userInfo.nickName,
+          imgurl: app.globalData.userInfo.avatarUrl
         }
-      })
-    }
-  },
-  onCancleParentBond: function () {
-    this.setData({
-      userFromCode: null,
-      'visible.preview': false,
-      'visible.alert': false,
-      'visible.modal': false
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        $Message({
+          content: res.data.msg,
+          type: 'success'
+        })
+        app.globalData.userid = res.data.userid
+        this.setData({
+          loading: false,
+        })
+        // 成功后刷新绑定信息
+        this.onApiGetStudents()
+      },
+      fail: (res) => {
+        $Message({
+          content: '绑定失败',
+          type: 'error'
+        })
+      }
     })
   },
   onApiCheckCode: function (event) {
@@ -100,16 +78,16 @@ Page({
         // console.log(res)
         if (res.data) {
            this.setData({
-             userFromCode: res.data,
-             'visible.preview': true,
+             user: res.data,
              'visible.alert': false,
+             'visible.card': true,
              loading: false
            })
         } else {
           this.setData({
-            userFromCode: res.data,
-            'visible.preview': false,
+            user: res.data,
             'visible.alert': true,
+            'visible.card': false,
             loading: false
           })
         }
@@ -133,16 +111,15 @@ Page({
         // console.log(res)
         if (res.statusCode == 200) {
           this.setData({
-            loading: false,
-            students: res.data
+            loading: false
           })
           app.globalData.students = res.data
         } else {
           this.setData({
-            loading: false,
-            students: []
+            loading: false
           })
-        }  
+        }
+        wx.navigateBack()
       }
     })
   },
@@ -152,9 +129,6 @@ Page({
    */
   onLoad: function (options) {
     // console.log(app.globalData)
-    this.setData({
-      students: app.globalData.students
-    })
   },
 
   /**

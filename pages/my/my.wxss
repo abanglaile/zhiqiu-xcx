@@ -1,5 +1,4 @@
 page {
-    background-color: #f8f8f9;
 }
 
 .wrapper {
@@ -21,53 +20,25 @@ page {
 
 .discription {
     color: #495060;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 5px;
-}
-
-.steps {
-    width: 100%;
 }
 
 .divider {
     width: 90%
 }
 
-.content {
-    width: 90%;
-    text-align: center;
-    margin-top: 50px;
-}
-
-.input {
-    border-bottom: 1px solid #dddee1;
-    background-color: inherit !important;
-}
-
-.alert {
-    color: #ff9900;
-    font-size: 15px;
-    padding-top: 10px;
-}
-
 .card {
     display: flex;
     box-sizing: border-box;
-    width: 100%;
     padding: 15px;
+    width: 80%;
     height: 80px;
     align-items: center;
     border: solid 1px #dddee1;
     border-radius: 7px;
     background-color: #fff;
-    margin: 15px 0;
-}
-
-.card-content {
-    width: calc(100% - 65px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .avatar {
@@ -81,7 +52,6 @@ page {
     color: #495060;
 }
 
-.card-notice {
-    font-size: 16px;
-    color: #495060;
+.grid {
+    width: 90%;
 }

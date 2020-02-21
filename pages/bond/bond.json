@@ -1,17 +1,13 @@
 {
   "usingComponents": {
-    "i-panel": "../../iviewModule/panel/index",
-    "i-cell-group": "../../iviewModule/cell-group/index",
-    "i-cell": "../../iviewModule/cell/index",
     "i-avatar": "../../iviewModule/avatar/index",
-    "i-modal": "../../iviewModule/modal/index",
     "i-input": "../../iviewModule/input/index",
-    "i-button": "../../iviewModule/button/index",
     "i-icon": "../../iviewModule/icon/index",
     "i-spin": "../../iviewModule/spin/index",
-    "i-toast": "../../iviewModule/toast/index"
+    "i-divider": "../../iviewModule/divider/index",
+    "i-message": "../../iviewModule/message/index"
   },
   "backgroundColor": "#f8f8f9",
-  "navigationBarTitleText": "绑定信息",
-  "enablePullDownRefresh": true
+  "navigationBarBackgroundColor": "#f8f8f9",
+  "navigationBarTitleText": "绑定学生"
 }

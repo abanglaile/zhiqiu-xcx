@@ -4,75 +4,57 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-// <<<<<<< HEAD
-//     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-//     // tabbar
-//     current: 'lesson'
-//   },
-//   // tabbar切换函数
-//   handleChange ({ detail }) {
-//     this.setData({
-//       current: detail.key
-//     })
-//     wx.navigateTo({
-//       url: `../${detail.key}/${detail.key}`
-//     })
-// =======
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    loading: false,
+    current: 0
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  // steps
+  handleClick() {
+    const addCurrent = this.data.current + 1;
+    const current = addCurrent > 2 ? 0 : addCurrent;
+    this.setData({
+      'current': current
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
+  // step-1
+  onApiCheckCode: function (event) {
+    // let dataset = event.currentTarget.dataset
+    // const code = dataset.code
+    this.setData({
+      code: event.detail.detail.value,
+      loading: true
+    })
+    wx.request({
+      url: app.globalData.server_url + '/getUserByCode',
+      data: {
+        code: this.data.code
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        // console.log(res)
+        if (res.data) {
           this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+            userFromCode: res.data,
+            'visible.preview': true,
+            'visible.alert': false,
+            loading: false
+          })
+        } else {
+          this.setData({
+            userFromCode: res.data,
+            'visible.preview': false,
+            'visible.alert': true,
+            loading: false
           })
         }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      }
     })
   },
-  test () {
-    wx.switchTab({
-      url: '../stuStatus/stuStatus'
-    })
+  // step-2
+  // step-3
+  //事件处理函数
+  onLoad: function () {
   }
-  // goToHourInquire: function(e){
-  //   wx.navigateTo({
-  //     url: '../hourInquire/hourInquire',
-  //   })
-  // }
 })

@@ -48,9 +48,16 @@ App({
                   } else {
                     that.globalData.students = []
                   }
-                  if (that.globalData.students.length == 0) {
+                  if (that.globalData.students.length == 1) {
+                    // 自动选择，并跳转到首页
+                    that.globalData.student_id = that.globalData.students[0].userid
                     wx.switchTab({
-                      url: '../bond/bond'
+                      url: '../lesson/lesson'
+                    })
+                  } else {
+                    // 弹出选择页由用户选择
+                    wx.navigateTo({
+                      url: '/pages/account/account'
                     })
                   }
                 }
@@ -74,10 +81,7 @@ App({
             success: res => {
               this.globalData.userInfo = res.userInfo
               console.log("globalData step1:",JSON.stringify(this.globalData))
-              wx.switchTab({
-                // url: '/pages/index/index',
-                url: '../lesson/lesson'
-              })
+              
               // 可以将 res 发送给后台解码出 unionId
               // wx.request({
               //   url: this.globalData.server_url + '/get_xcx_unionid',
@@ -122,7 +126,8 @@ App({
     unionid: null,
     userid: null,
     userInfo: null,
-    students: [],
+    students: [], // 已绑定的所有学生信息
+    student_id: '', // 当前选择的学生id
     server_url: "https://www.zhiqiu.pro/api"
     // server_url: "http://127.0.0.1:7001/api"
   }

@@ -1,11 +1,13 @@
 {
   "pages": [
+    "pages/account/account",
+    "pages/bond/bond",
     "pages/lesson/lesson",
     "pages/logs/logs",
     "pages/authorize/authorize",
     "pages/contract/contract",
-    "pages/hourInquire/hourInquire",
-    "pages/bond/bond"
+    "pages/my/my",
+    "pages/hourInquire/hourInquire"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,7 +35,7 @@
         "selectedIconPath": "/images/contract_fill.png"
       },
       {
-        "pagePath": "pages/bond/bond",
+        "pagePath": "pages/my/my",
         "text": "我的",
         "iconPath": "/images/user.png",
         "selectedIconPath": "/images/user_fill.png"

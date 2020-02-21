@@ -1,18 +1,17 @@
 {
   "usingComponents": {
-    "i-steps": "../../iviewModule/steps/index",
-    "i-step": "../../iviewModule/step/index",
     "i-avatar": "../../iviewModule/avatar/index",
-    "i-input": "../../iviewModule/input/index",
     "i-button": "../../iviewModule/button/index",
     "i-icon": "../../iviewModule/icon/index",
-    "i-spin": "../../iviewModule/spin/index",
     "i-divider": "../../iviewModule/divider/index",
-    "i-panel": "../../iviewModule/panel/index",
     "i-cell-group": "../../iviewModule/cell-group/index",
     "i-cell": "../../iviewModule/cell/index",
-    "i-toast": "../../iviewModule/toast/index"
+    "i-tag": "../../iviewModule/tag/index",
+    "i-grid": "../../iviewModule/grid/index",
+    "i-grid-item": "../../iviewModule/grid-item/index",
+    "i-grid-icon": "../../iviewModule/grid-icon/index",
+    "i-grid-label": "../../iviewModule/grid-label/index"
   },
   "backgroundColor": "#f8f8f9",
-  "navigationBarTitleText": "知秋Class"
+  "navigationBarTitleText": "我的账户"
 }

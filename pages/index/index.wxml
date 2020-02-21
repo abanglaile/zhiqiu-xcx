@@ -1,10 +1,49 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="wrapper">
+  <image class="logo" src="/images/zhiqiu_logo.png" alt="知秋" />
+  <view class="discription">欢迎使用知秋Class</view>
+  <view class="discription">请参照指引完成注册</view>
+  <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec">·</i-divider>
+  <i-steps class="steps" current="{{current}}">
+    <i-step>
+      <view slot="title">获取绑定码</view>
+    </i-step>
+    <i-step>
+      <view slot="title">绑定学生</view>
+    </i-step>
+    <i-step>
+      <view slot="title">选择学生</view>
+    </i-step>
+  </i-steps>
+  <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec">·</i-divider>
+
+  <view class="content" wx:if="{{current == 0}}">
+    <i-input value="{{ code }}" data-code="{{ code }}" placeholder="请输入绑定码" maxlength="100" bind:blur="onApiCheckCode" />
+    <i-panel wx:if="{{ visible.alert }}" hide-border="{{ true }}">
+      <view class="alert">
+        <i-icon type="prompt" />
+        无效验证码
+      </view>
+    </i-panel>
+    <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
+    <i-button type="primary" class="divider" bindclick="toStepTwo">验证</i-button>
   </view>
+
+  <view class="content" wx:if="{{current == 1}}">
+    <i-cell wx:if="{{ visible.preview }}" title="{{ userFromCode.realname }}" is-link bind:click="onApiParentBond" label="点击绑定">
+      <i-avatar slot="icon" src="{{ userFromCode.avatar }}" size="default"></i-avatar>
+    </i-cell>
+    <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
+    <i-button type="primary" class="divider" bindclick="toStepThree">确认绑定</i-button>
+  </view>
+
+  <view class="content" wx:if="{{current == 2}}">
+    <i-cell wx:if="{{ visible.preview }}" title="{{ userFromCode.realname }}" is-link bind:click="onApiParentBond" label="点击绑定">
+      <i-avatar slot="icon" src="{{ userFromCode.avatar }}" size="default"></i-avatar>
+    </i-cell>
+    <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
+    <i-button type="primary" class="divider" bindclick="finish">结束</i-button>
+  </view>
+
+  <i-button class="divider" bindclick="handleClick">下一步</i-button>
 </view>
