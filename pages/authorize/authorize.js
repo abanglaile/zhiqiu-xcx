@@ -17,7 +17,7 @@ Page({
               // that.queryUserInfo();
               //用户已经授权过
               wx.switchTab({
-                url: '../lesson/lesson'
+                url: '../index/index'
               })
             }
           });
@@ -33,7 +33,7 @@ Page({
       // let that = this;
       // that.insertUserInfo(e);
       wx.switchTab({
-        url: '../lesson/lesson'
+        url: '../index/index'
       })
       
     } else {

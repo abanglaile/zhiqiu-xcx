@@ -48,6 +48,7 @@ App({
                   } else {
                     that.globalData.students = []
                   }
+                  that.globalData.is_login = true
                   if (that.globalData.students.length == 1) {
                     // 自动选择，并跳转到首页
                     that.globalData.student_id = that.globalData.students[0].userid
@@ -126,6 +127,7 @@ App({
     unionid: null,
     userid: null,
     userInfo: null,
+    is_login: false,
     students: [], // 已绑定的所有学生信息
     student_id: '', // 当前选择的学生id
     server_url: "https://www.zhiqiu.pro/api"

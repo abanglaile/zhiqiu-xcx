@@ -1,60 +1,34 @@
-//index.js
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
     loading: false,
-    current: 0
+    test: '',
+    testid: ''
   },
-  // steps
-  handleClick() {
-    const addCurrent = this.data.current + 1;
-    const current = addCurrent > 2 ? 0 : addCurrent;
+  // 事件处理函数
+  onShow: function () {
     this.setData({
-      'current': current
+      test: app.globalData.students,
+      testid: app.globalData.student_id
     })
-  },
-  // step-1
-  onApiCheckCode: function (event) {
-    // let dataset = event.currentTarget.dataset
-    // const code = dataset.code
-    this.setData({
-      code: event.detail.detail.value,
-      loading: true
-    })
-    wx.request({
-      url: app.globalData.server_url + '/getUserByCode',
-      data: {
-        code: this.data.code
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        // console.log(res)
-        if (res.data) {
-          this.setData({
-            userFromCode: res.data,
-            'visible.preview': true,
-            'visible.alert': false,
-            loading: false
-          })
-        } else {
-          this.setData({
-            userFromCode: res.data,
-            'visible.preview': false,
-            'visible.alert': true,
-            loading: false
-          })
-        }
+    let is_login = app.globalData.is_login
+    let students = app.globalData.students
+    let student_id = app.globalData.student_id
+    if (is_login) {
+      if (students.length == 1 || student_id) {
+        // 只有一个学生或者已选择当前学生，自动选择，并跳转到首页
+        app.globalData.student_id = students[0].userid
+        wx.switchTab({
+          url: '../lesson/lesson'
+        })
+      } else {
+        // 弹出选择页由用户选择
+        wx.navigateTo({
+          url: '/pages/account/account'
+        })
       }
-    })
-  },
-  // step-2
-  // step-3
-  //事件处理函数
-  onLoad: function () {
+    }  
   }
 })

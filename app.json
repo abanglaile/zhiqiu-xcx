@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/account/account",
     "pages/bond/bond",
     "pages/lesson/lesson",

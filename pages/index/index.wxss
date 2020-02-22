@@ -1,4 +1,11 @@
 /**index.wxss**/
+page {
+  background-color: #f8f8f9;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 45%;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -9,27 +16,20 @@
 }
 
 .logo {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border: solid 1px #dddee1;
   border-radius: 30px;
   margin-bottom: 10px;
 }
+
 .discription {
   color: #495060;
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
-.steps {
-  width: 100%;
-}
+
 .divider {
-  width: 90%
-}
-.content {
-  width: 90%;
-  text-align: center;
-}
-.alert {
-  color: #ed3f14;
+  width: 60%
 }
