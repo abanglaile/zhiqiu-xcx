@@ -12,5 +12,7 @@
     "mp-actionSheet": "../../miniprogram_npm/weui-miniprogram/actionsheet/actionsheet",
     "mp-icon": "../../miniprogram_npm/weui-miniprogram/icon/icon",
     "mp-loading": "../../miniprogram_npm/weui-miniprogram/loading/loading"
-  }
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

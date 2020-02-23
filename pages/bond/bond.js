@@ -61,38 +61,47 @@ Page({
   onApiCheckCode: function (event) {
     // let dataset = event.currentTarget.dataset
     // const code = dataset.code
-    this.setData({
-      code: event.detail.detail.value,
-      loading: true
-    })
-    wx.request({
-      url: app.globalData.server_url + '/getUserByCode',
-      data: {
-        code: this.data.code
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        // console.log(res)
-        if (res.data) {
-           this.setData({
-             user: res.data,
-             'visible.alert': false,
-             'visible.card': true,
-             loading: false
-           })
-        } else {
-          this.setData({
-            user: res.data,
-            'visible.alert': true,
-            'visible.card': false,
-            loading: false
-          })
+    let pattern = /^\w*$/i
+    let code = event.detail.detail.value
+    if (pattern.test(code)) {
+      this.setData({
+        code: code,
+        loading: true
+      })
+      wx.request({
+        url: app.globalData.server_url + '/getUserByCode',
+        data: {
+          code: this.data.code
+        },
+        method: 'GET',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: (res) => {
+          // console.log(res)
+          if (res.data) {
+            this.setData({
+              user: res.data,
+              'visible.alert': false,
+              'visible.card': true,
+              loading: false
+            })
+          } else {
+            this.setData({
+              user: res.data,
+              'visible.alert': true,
+              'visible.card': false,
+              loading: false
+            })
+          }
         }
-      }
-    })
+      })
+    } else {
+      this.setData({
+        'visible.alert': true,
+        loading: false
+      })
+    }
   },
   onApiGetStudents: function () {
     this.setData({
