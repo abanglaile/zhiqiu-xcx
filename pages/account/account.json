@@ -1,0 +1,14 @@
+{
+    "usingComponents": {
+        "i-avatar": "../../iviewModule/avatar/index",
+        "i-button": "../../iviewModule/button/index",
+        "i-icon": "../../iviewModule/icon/index",
+        "i-divider": "../../iviewModule/divider/index",
+        "i-cell-group": "../../iviewModule/cell-group/index",
+        "i-cell": "../../iviewModule/cell/index",
+        "i-tag": "../../iviewModule/tag/index"
+    },
+    "backgroundColor": "#f8f8f9",
+    "navigationBarBackgroundColor": "#f8f8f9",
+    "navigationBarTitleText": "切换学生"
+}

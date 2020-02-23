@@ -1,0 +1,20 @@
+<view class="wrapper">
+    <image class="logo" src="/images/zhiqiu_logo.png" alt="知秋" />
+    <view class="discription">轻触以切换学生</view>
+    <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec"></i-divider>
+
+    <view wx:for="{{ students }}" wx:key="userid" class="card" mark:id="{{ item.userid }}" bind:tap="onSwitchStudent">
+        <image class="avatar" src="{{ item.avatar }}" alt="学生" />
+        <view class="card-content">
+            <view class="card-name">{{ item.realname }}</view>
+            <i-tag wx:if="{{ current == item.userid }}" class="i-tags" name="标签" color="green">当前使用</i-tag>
+        </view>
+    </view>
+
+    <view class="card" bind:tap="onAddStudent">
+        <i-icon i-class="avatar new" type="add" />
+        <view class="card-content">
+            <view class="card-name">添加绑定</view>
+        </view>
+    </view>
+</view>

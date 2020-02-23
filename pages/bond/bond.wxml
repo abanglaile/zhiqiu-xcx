@@ -1,23 +1,26 @@
-<i-panel title="已绑定">
-  <i-cell-group>
-    <i-cell title="新增绑定" is-link bind:click="onAddStudent">
-      <i-icon slot="icon" type="addressbook_fill" size="28" color="#5cadff"/>
-    </i-cell>
-    <i-cell wx:for="{{ students }}" wx:key="userid" title="{{ item.realname }}" bind:click="onTapStudent">
-      <i-avatar slot="icon" src="{{ item.avatar }}" size="default"></i-avatar>
-    </i-cell>
-  </i-cell-group>
-</i-panel>
+<view class="wrapper">
+  <image class="logo" src="/images/zhiqiu_logo.png" alt="知秋" />
+  <view class="discription">欢迎使用知秋Class</view>
+  <view class="discription">联系授课老师获取绑定码</view>
+  <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec"></i-divider>
+  
+  <view class="content">
+    <i-input i-class="input" value="{{ code }}" data-code="{{ code }}" placeholder="请输入绑定码" maxlength="100" bind:blur="onApiCheckCode" />
 
-<i-modal title="新增绑定" visible="{{ visible.modal }}" show-ok="{{ false }}" bind:cancel="onCancleParentBond">
-  <i-input value="{{ code }}" data-code="{{ code }}" placeholder="请输入绑定码" maxlength="100" bind:blur="onApiCheckCode" />
-  <i-panel wx:if="{{ visible.alert }}" hide-border="{{ true }}">
-    <view class="alert"><i-icon type="prompt" />无效验证码</view>
-  </i-panel>
-  <i-cell wx:if="{{ visible.preview }}" title="{{ userFromCode.realname }}" is-link bind:click="onApiParentBond" label="点击绑定">
-    <i-avatar slot="icon" src="{{ userFromCode.avatar }}" size="default"></i-avatar>
-  </i-cell>
-  <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
-</i-modal>
+    <view wx:if="{{ visible.alert }}" class="alert">
+      无效验证码
+    </view>
 
-<i-toast id="toast" />
+    <view wx:if="{{ visible.card }}" class="card" mark:id="{{ user.userid }}" bind:tap="onApiParentBond">
+      <image class="avatar" src="{{ user.avatar }}" alt="学生" />
+      <view class="card-content">
+        <view class="card-name">{{ user.realname }}</view>
+        <view class="card-notice">轻触绑定</view>
+      </view>
+    </view>
+    
+    <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
+  </view>
+
+  <i-message id="message" />
+</view>

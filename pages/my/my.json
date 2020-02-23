@@ -7,9 +7,11 @@
     "i-cell-group": "../../iviewModule/cell-group/index",
     "i-cell": "../../iviewModule/cell/index",
     "i-tag": "../../iviewModule/tag/index",
-    "i-spin": "../../iviewModule/spin/index"
+    "i-grid": "../../iviewModule/grid/index",
+    "i-grid-item": "../../iviewModule/grid-item/index",
+    "i-grid-icon": "../../iviewModule/grid-icon/index",
+    "i-grid-label": "../../iviewModule/grid-label/index"
   },
   "backgroundColor": "#f8f8f9",
-  "navigationBarBackgroundColor": "#f8f8f9",
-  "navigationBarTitleText": "知秋Class"
+  "navigationBarTitleText": "我的账户"
 }
