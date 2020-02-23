@@ -1,8 +1,8 @@
 <!--pages/stuStatus/stuStatus.wxml-->
 <!-- <text>pages/stuStatus/stuStatus.wxml</text> -->
 <view>
-
-  <view class="sort-list">
+  <mp-loading type="circle" show="{{loading}}"></mp-loading>
+  <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>         <view class="sort-list">
     <view class="sort" mark:num="1" bindtap="selectTab">
       {{select_sign}}
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
@@ -79,5 +79,4 @@
       </view>
     </view>
   </view>
-  <i-load-more tip="上拉加载更多" loading="{{false}}" />
 </view>

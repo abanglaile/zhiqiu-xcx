@@ -9,6 +9,7 @@ Page({
    */
   data: {
     filter_visible: false,
+    loading: false,
     select_tab_num: 0,
     sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
     time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
@@ -116,6 +117,9 @@ Page({
   onShareAppMessage: function () {
 
   },
+  onPullDownRefresh: function (){
+    this.getStudentLesson()
+  },
   selectCourse: function(e){
     let index = e.target.dataset['index']
     this.data.testCourseJson[index].selectd = !this.data.testCourseJson[index].selectd
@@ -143,7 +147,7 @@ Page({
     })
   },
 
-  getStartEndTime(text){
+  getStartEndTime(text){    
     switch(text){
       case '本周':
         return {
@@ -173,6 +177,7 @@ Page({
       is_sign: this.data.select_sign == '不限' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
     console.log(JSON.stringify(filter_option));
+    // console.log(app.globalData.students)
     if (true || app.globalData.students.length > 0) {
       this.setData({
         loading: true
@@ -189,13 +194,17 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: (res) => {
+          console.log(this.data.loading)
           this.setData({
             loading: false,
             student_lesson: res.data
           })
-          console.log(res.data)
+          console.log(this.data.loading); 
         },
         fail: (res) => {
+          this.setData({
+            loading: false,
+          })
           $Toast({
             content: '获取课程数据',
             type: 'error'

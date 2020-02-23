@@ -67,7 +67,7 @@ Page({
   },
   test () {
     wx.switchTab({
-      url: '../stuStatus/stuStatus'
+      url: '../lesson/lesson'
     })
   }
   // goToHourInquire: function(e){
