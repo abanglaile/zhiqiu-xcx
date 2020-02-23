@@ -38,7 +38,7 @@ Page({
       wx.request({
         url: app.globalData.server_url + '/getStudentGroup',
         data: {
-          student_id: app.globalData.students[0].userid,
+          student_id: app.globalData.student_id,
         },
         method: 'GET',
         header: {
