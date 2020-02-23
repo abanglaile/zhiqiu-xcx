@@ -8,12 +8,12 @@
     "pages/authorize/authorize",
     "pages/contract/contract",
     "pages/my/my",
-    "pages/hourInquire/hourInquire"
+    "pages/contractHistory/contractHistory"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "知秋Class",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },

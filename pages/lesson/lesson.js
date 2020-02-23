@@ -101,7 +101,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getStudentLesson()
   },
 
   /**
@@ -116,9 +116,6 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  onPullDownRefresh: function (){
-    this.getStudentLesson()
   },
   selectCourse: function(e){
     let index = e.target.dataset['index']
@@ -178,15 +175,15 @@ Page({
     }
     console.log(JSON.stringify(filter_option));
     // console.log(app.globalData.students)
-    if (true || app.globalData.students.length > 0) {
+    if (app.globalData.student_id) {
       this.setData({
         loading: true
       })
       wx.request({
         url: app.globalData.server_url + '/getStudentLesson', //仅为示例，并非真实的接口地址
         data: {
-          student_id: app.globalData.student_id,
-          // student_id: 'd77412a04cc811eab8d775ec7f1ac387',
+          // student_id: app.globalData.student_id,
+          student_id: 'd77412a04cc811eab8d775ec7f1ac387',
           filter_option: filter_option
         },
         method: 'POST',
