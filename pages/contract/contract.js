@@ -103,11 +103,13 @@ Page({
               loading: false,
               student_group: res.data
             })
+            wx.stopPullDownRefresh()
           } else {
             this.setData({
               loading: false,
               student_group: []
             })
+            wx.stopPullDownRefresh()
           }
         }
       })

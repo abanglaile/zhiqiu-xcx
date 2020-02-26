@@ -1,6 +1,6 @@
 /**index.wxss**/
 page {
-  background-color: #f8f8f9;
+  /* background-color: #f8f8f9; */
   height: 100%;
   box-sizing: border-box;
   padding-top: 45%;
@@ -18,8 +18,8 @@ page {
 .logo {
   width: 150px;
   height: 150px;
-  border: solid 1px #dddee1;
-  border-radius: 30px;
+  /* border: solid 1px #dddee1; */
+  /* border-radius: 30px; */
   margin-bottom: 10px;
 }
 
