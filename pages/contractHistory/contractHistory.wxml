@@ -1,29 +1,57 @@
 <!--pages/hourInquire/hourInquire.wxml-->
 <view>
-  <view wx:for="{{test_json}}" wx:for-index="idx" style="margin-top: 20rpx; padding: 36rpx 36rpx 36rpx 36rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);" class="i-card">
-    <view class="i-card-header" style="padding: 0 0 40rpx 18rpx;">
-      <view style="background: #1890ff;" class="i-class i-avatar i-avatar-circle i-avatar-small">
-        <view class="i-avatar-string">{{util.getAvatarText(item.course_label)}}</view>
-      </view>
-      <view class="i-card-header-content" style="margin-left: 16rpx; font-size: 30rpx;font-weight: bold">
-        {{item.group_name}}
+  <view wx:for="{{test_json}}" wx:for-index="idx" style="margin: 20rpx 32rpx; padding: 36rpx 60rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);border: 1rpx solid #dddee1;border-radius: 5px;" >
+    <view style="padding: 0 0 36rpx 0;">
+      <view style="font-size: 24rpx; color: #1890ff;">合同金额</view>
+      <view>
+        <span style="font-size: 50rpx;font-weight: bold">2586</span>
+        <span style="font-size: 24rpx;"> 人民币</span>
       </view>
     </view>
+    <view style="margin: 0 0 30rpx 0">
     <i-row>
-      <i-col offset="1" span="8">
-        <view style="font-size: 24rpx;">函授剩余课时</view>
-        <view>
-          <span style="font-size: 44rpx; color: #1890ff;">{{util.toFixed(item.remain_class/60, 1)}}</span>
-          <span style="font-size: 20rpx;"> 小时</span>
+      <i-col span="10">
+        <view style="font-size: 24rpx; color: #1890ff;">课程名称</view>
+        <view style="font-size: 28rpx;">
+          李承耀-初中数学
         </view>
       </i-col>
-      <i-col offset="2" span="8">
-        <view style="font-size: 24rpx;">导学剩余课时</view>
-        <view>
-          <span style="font-size: 44rpx; color: #1890ff;">{{util.toFixed(item.remain_guide/60, 1)}}</span>
-          <span style="font-size: 20rpx;"> 小时</span>
+      <i-col offset="2" span="10">
+        <view style="font-size: 24rpx; color: #1890ff;">合同时间</view>
+        <view style="font-size: 28rpx;">
+          2020年1月22日
         </view>
       </i-col>
     </i-row>
+    </view>
+    <view style="margin: 0 0 0 0">
+    <i-row>
+      <i-col span="10">
+        <view style="font-size: 24rpx; color: #1890ff;">函授课时</view>
+        <view style="font-size: 28rpx;">
+          8.0 小时
+        </view>
+      </i-col>
+      <i-col offset="2" span="10">
+        <view style="font-size: 24rpx; color: #1890ff;">导学课时</view>
+        <view style="font-size: 28rpx;">
+          2.0 小时
+        </view>
+      </i-col>
+    </i-row>
+    </view>
+    <!-- <view style="margin: 0 0 30rpx 24rpx">
+    <i-row>
+      <i-col span="10">
+        <view style="font-size: 24rpx; color: #8c8c8c;">课程类型</view>
+        <view style="font-size: 28rpx;">
+           英语 一对一
+        </view>
+      </i-col>
+      <i-col offset="2" span="10">
+        <view style="font-size: 28rpx; color: #1890ff;">合同详情 ></view>
+      </i-col>
+    </i-row>
+    </view> -->
   </view>
 </view>

@@ -137,7 +137,6 @@ Page({
 
   /**********/
   selectTab: function (e) {
-    console.log(e)
     this.setData({
       filter_visible: !this.data.filter_visible,
       select_tab_num: e.mark.num
@@ -182,8 +181,8 @@ Page({
       wx.request({
         url: app.globalData.server_url + '/getStudentLesson', //仅为示例，并非真实的接口地址
         data: {
-          // student_id: app.globalData.student_id,
-          student_id: 'd77412a04cc811eab8d775ec7f1ac387',
+          student_id: app.globalData.student_id,
+          //student_id: 'd77412a04cc811eab8d775ec7f1ac387',
           filter_option: filter_option
         },
         method: 'POST',

@@ -59,7 +59,7 @@ module.exports.toFixed = toFixed;
 </wxs>
 
 <view>
-  <mp-cell link url="../index" footer="查看历史合同" >
+  <mp-cell link url="../contractHistory/contractHistory" footer="查看历史合同" >
   </mp-cell>
   <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>
   <view wx:for="{{student_group}}" wx:for-index="idx" style="margin-top: 20rpx; padding: 36rpx 36rpx 36rpx 36rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);" class="i-card">

@@ -23,13 +23,10 @@
   <mp-actionSheet bindactiontap="selectSign" bindclose="onClose" show="{{select_tab_num == 1 && filter_visible}}" actions="{{sign_list}}" >
   </mp-actionSheet>
 
-  <mp-actionSheet bindclose="onClose" show="{{select_tab_num == 4 && filter_visible}}" actions="{{[{ text: '全部时间', value: 1 },{ text: '本周', value: 2 },{ text: '一周内', type: 'warn', value: 3 }]}}" >
-  </mp-actionSheet>
-
   <mp-halfScreenDialog 
     show="{{(select_tab_num == 3 && filter_visible)}}"
     maskClosable="false"
-    close="onClose"
+    bindclose="onClose"
     bindbuttontap="buttontap"
     buttons="{{[{type: 'default', text: '重置', value: 0}, {type: 'primary', text: '确定', value: 1}]}}"
   >
