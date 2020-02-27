@@ -1,77 +1,134 @@
 <!--pages/stuStatus/stuStatus.wxml-->
 <!-- <text>pages/stuStatus/stuStatus.wxml</text> -->
-<view>
-  <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>              <view class="sort-list">
-    <view class="sort" mark:num="1" bindtap="selectTab">
+<view class="wrapper">
+  <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>
+  <view class="sort-list">
+    <view class="sort" mark:type="sign" bindtap="selectTab">
       {{select_sign}}
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
     </view>
-    <view class="sort" mark:num="3" bindtap="selectTab">
+    <view class="sort" mark:type="lesson" bindtap="selectTab">
       课程类型
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
     </view>
-    <view class="sort" mark:num="2" bindtap="selectTab">
+    <view class="sort" mark:type="time" bindtap="selectTab">
       {{select_time}}
       <mp-icon extClass="unfold" icon="arrow" size="10" color="#ccc" />
-    </view>
-    
+    </view> 
   </view>  
 
-  <mp-actionSheet bindactiontap="selectTime" bindclose="onClose" show="{{select_tab_num == 2 && filter_visible}}" actions="{{time_list}}" >
-  </mp-actionSheet>
+  <!-- <mp-actionSheet bindactiontap="selectTime" bindclose="onClose" show="{{ visible.time }}" actions="{{time_list}}" >
+  </mp-actionSheet> -->
 
-  <mp-actionSheet bindactiontap="selectSign" bindclose="onClose" show="{{select_tab_num == 1 && filter_visible}}" actions="{{sign_list}}" >
-  </mp-actionSheet>
+  <!-- <mp-actionSheet bindactiontap="selectSign" bindclose="onClose" show="{{ visible.sign }}" actions="{{sign_list}}" >
+  </mp-actionSheet> -->
 
-  <mp-halfScreenDialog 
-    show="{{(select_tab_num == 3 && filter_visible)}}"
-    maskClosable="false"
-    bindclose="onClose"
-    bindbuttontap="buttontap"
-    buttons="{{[{type: 'default', text: '重置', value: 0}, {type: 'primary', text: '确定', value: 1}]}}"
-  >
-    <view slot="title">选择课程</view>
-    <view slot="desc">
-      <view style="font-size: 30rpx; margin: 20rpx 0 20rpx 0;">授课方式</view>
-      <view>
-        <button data-index="{{index}}" size="mini" class="{{item.selected ? 'filter-btn-select' : 'filter-btn'}}" 
-          wx:for="{{label_list}}"
-          wx:for-index="index"
-          bindtap="selectLabel">{{item.text}}</button>
-      </view>
-      <view style="font-size: 30rpx; margin: 20rpx 0 20rpx 0;">科目</view>
-      <view>     
-        <button data-index="{{index}}" size="mini" class="{{item.selected ? 'filter-btn-select' : 'filter-btn'}}" 
-          wx:for="{{course_list}}"
-          bindtap="selectCourse">{{item.text}}</button>
+  <i-action-sheet
+    visible="{{ visible.time }}"
+    actions="{{ time_list }}"
+    mark:type="time"
+    show-cancel
+    bind:cancel="onClose"
+    bind:click="selectTime"
+    mask-closable>
+    <view slot="header">
+      <view class="title">课程时间</view>
+    </view>
+  </i-action-sheet>
+
+  <i-action-sheet
+    visible="{{ visible.sign }}"
+    actions="{{ sign_list }}"
+    mark:type="sign"
+    show-cancel
+    bind:cancel="onClose"
+    bind:click="selectSign"
+    mask-closable>
+    <view slot="header">
+      <view class="title">课程状态</view>
+    </view>
+  </i-action-sheet>
+
+  <i-action-sheet
+    visible="{{ visible.lesson }}"
+    mark:type="lesson"
+    bind:cancel="onClose"
+    mask-closable>
+    <view slot="header">
+      <view class="title">课程类型</view>
+      <view class="desc">
+        <i-panel title="授课方式" hide-border>
+          <view style="padding: 15px;">
+            <i-button
+              i-class="{{item.selected ? 'g-button g-button-plain' : 'g-button'}}"
+              bind:click="selectLabel"
+              type="ghost"
+              size="small"
+              inline
+              data-index="{{index}}"
+              wx:for="{{label_list}}"
+              wx:for-index="index"
+              wx:key="text">
+              {{item.text}}
+            </i-button>
+          </view>
+        </i-panel>
+        <i-panel title="科目" hide-border>
+          <view style="padding: 15px;">
+            <i-button
+              i-class="{{item.selected ? 'g-button g-button-plain' : 'g-button'}}"
+              bind:click="selectCourse"
+              type="ghost"
+              size="small"
+              inline
+              data-index="{{index}}"
+              wx:for="{{course_list}}"
+              wx:for-index="index"
+              wx:key="text">
+              {{item.text}}
+            </i-button>
+          </view>
+        </i-panel>
+        <i-panel title="">
+          <view class="dialog-button-wrapper" style="padding: 15px;">
+            <view class="reset-button-wrapper" mark:value="0" bind:tap="buttontap">
+              <i-icon size="26" type="refresh" />
+              重置
+            </view>
+            <view class="confirm-button-wrapper">
+              <i-button mark:value="1" bind:click="buttontap" type="primary" size="large" long>确认</i-button>
+            </view>
+          </view>
+        </i-panel>
       </view>
     </view>
-  </mp-halfScreenDialog>
-  <view wx:for="{{student_lesson}}" wx:for-index="idx" wx:key="id" style="padding: 6px 0 0 0;">
-    <view class="i-card">
-      <view class="i-card-header" style="padding: 12px 18px;">
-        <!-- <view style="background: #1890ff; margin-right: 20rpx" class="i-class i-avatar i-avatar-circle i-avatar-small">
+  </i-action-sheet>
+
+  <view wx:for="{{student_lesson}}" wx:for-index="idx" wx:key="id" class="i-card g-card">
+    <view class="i-card-header" style="padding: 12px 18px;">
+      <!-- <view style="background: #1890ff; margin-right: 20rpx" class="i-class i-avatar i-avatar-circle i-avatar-small">
           <view class="i-avatar-string">英</view>
         </view> -->
-        <view class="i-card-header-content" style="font-size:30rpx">
-          {{item.group_name}}
-        </view>
-        <view class="i-card-header-extra">
-          <i-tag class="i-tags" color="{{item.label_name=='函授'? 'green':'blue'}}">{{item.label_name}}</i-tag>
-        </view>
+      <view class="i-card-header-content" style="font-size:30rpx">{{item.group_name}}</view>
+      <view class="i-card-header-extra">
+        <i-tag class="i-tags" color="{{item.label_name=='函授'? 'green':'blue'}}">
+          {{item.label_name}}
+        </i-tag>
       </view>
+    </view>
+    <view>
+      <view style="padding:0 0 4px 16px;font-size:13px;color:gray;">
+        <i-icon type="clock" size="20" color="#ccc" style="padding: 0 12rpx 0 0;" />
+        {{item.lesson_time}}
+      </view>
+      <view class="i-card-header" style="padding:0 0 12px 16px;font-size:13px;color:gray;">
+        <i-icon type="coordinates_fill" size="20" color="#ccc" style="padding: 0 12rpx 0 0;" />
+        {{item.room_name}}
+      </view>
+    </view>
+    <view class="i-card-body" style="padding:8px 16px;font-size:13px;color:gray;">
       <view>
-        <view style="padding:0 0 4px 16px;font-size:13px;color:gray;">
-          <i-icon type="clock" size="20" color="#ccc" style="padding: 0 12rpx 0 0;" />{{item.lesson_time}}
-        </view>
-        <view class="i-card-header" style="padding:0 0 12px 16px;font-size:13px;color:gray;">
-          <i-icon type="coordinates_fill" size="20" color="#ccc" style="padding: 0 12rpx 0 0;" />{{item.room_name}}
-        </view>
-      </view>
-      <view class="i-card-body" style="padding:8px 16px;font-size:13px;color:gray;">
-        <view>
-          <i-icon type="mine" size="20" color="#ccc" style="padding: 0 3px 0 0;" />{{item.teacher_name}}
-        </view>
+        授课老师：{{item.teacher_name}}
       </view>
     </view>
   </view>

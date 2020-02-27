@@ -8,11 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    filter_visible: false,
+    visible: {
+      sign: false,
+      lesson: false,
+      time: false
+    },
     loading: false,
-    select_tab_num: 0,
-    sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
-    time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
+    sign_list: [{ name: '所有状态', value: 2, color: '#FA5151' }, { name: '已上课', value: 1 }, { name: '未上课', value: 0 }],
+    time_list: [{ name: '全部时间', value: 0 }, { name: '本周', value: 1, color: '#FA5151' }, { name: '本月', value: 2 }],
     label_list: [
       { text: '函授', label_id: 'class', selected: true }, 
       { text: '导学', label_id: 'guide', selected: true }
@@ -29,7 +32,7 @@ Page({
       { text: '历史', course_label: 9, selected: true }
     ],
     select_time: '本周',
-    select_sign: '不限',
+    select_sign: '所有状态',
 
     
     student_lesson: [
@@ -62,11 +65,11 @@ Page({
       // },
     ],
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getStudentLesson();
   },
   
   /**
@@ -80,7 +83,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getStudentLesson();
   },
 
   /**
@@ -137,10 +140,7 @@ Page({
 
   /**********/
   selectTab: function (e) {
-    this.setData({
-      filter_visible: !this.data.filter_visible,
-      select_tab_num: e.mark.num
-    })
+    this.setData({visible: { [e.mark.type]: true }})
   },
 
   getStartEndTime(text){    
@@ -170,7 +170,7 @@ Page({
       end_time: start_end_time.end_time,
       course_label_list: this.data.course_list.filter(c => c.selected),
       label_id_list: this.data.label_list.filter(l => l.selected),
-      is_sign: this.data.select_sign == '不限' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
+      is_sign: this.data.select_sign == '所有状态' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
     console.log(JSON.stringify(filter_option));
     // console.log(app.globalData.students)
@@ -182,7 +182,7 @@ Page({
         url: app.globalData.server_url + '/getStudentLesson', //仅为示例，并非真实的接口地址
         data: {
           student_id: app.globalData.student_id,
-          //student_id: 'd77412a04cc811eab8d775ec7f1ac387',
+          // student_id: 'd77412a04cc811eab8d775ec7f1ac387',
           filter_option: filter_option
         },
         method: 'POST',
@@ -190,12 +190,13 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: (res) => {
-          console.log(this.data.loading)
+          // console.log(this.data.loading)
           this.setData({
             loading: false,
             student_lesson: res.data
           })
-          console.log(this.data.loading); 
+          wx.stopPullDownRefresh()
+          // console.log(this.data.loading); 
         },
         fail: (res) => {
           this.setData({
@@ -205,6 +206,7 @@ Page({
             content: '获取课程数据',
             type: 'error'
           });
+          wx.stopPullDownRefresh()
           console.log(res.data)
         }
       })
@@ -218,26 +220,26 @@ Page({
   },
 
   selectTime(e) {
-    let time_list = [{ text: '全部时间', value: 0 }, { text: '本周', value: 1 }, { text: '本月', value: 2 }];
+    let time_list = [{ name: '全部时间', value: 0 }, { name: '本周', value: 1 }, { name: '本月', value: 2 }];
     const index = e.detail.index
-    time_list[index].type = 'warn';
+    time_list[index].color = '#FA5151';
     this.setData({
-      select_time: time_list[index].text,
+      select_time: time_list[index].name,
       time_list: time_list,
-      filter_visible: false
+      'visible.time': false
     })
     this.getStudentLesson()
   },
 
   selectSign(e) {
-    let sign_list = [{ text: '不限', value: 0 }, { text: '已上课', value: 1 }, { text: '未上课', value: 2 }]
+    let sign_list = [{ name: '所有状态', value: 0 }, { name: '已上课', value: 1 }, { name: '未上课', value: 2 }]
     const index = e.detail.index
-    sign_list[index].type = 'warn'
-    console.log(sign_list)
+    sign_list[index].color = '#FA5151'
+    // console.log(sign_list)
     this.setData({
-      select_sign: sign_list[index].text,
+      select_sign: sign_list[index].name,
       sign_list: sign_list,
-      filter_visible: false
+      'visible.sign': false
     })
     this.getStudentLesson()
   },
@@ -265,21 +267,22 @@ Page({
   },
 
   onClose(e){
-    this.setData({
-      filter_visible: false
-    })
+    let data = {
+      visible: { [e.mark.type]: false }
+    }
+    this.setData(data)
   },
 
   buttontap(e) {
-    console.log(e.detail)
-    if(e.detail.index == 1){
+    // console.log(e.detail)
+    if(e.mark.value == "1"){
       this.setData({
-        filter_visible: false
+        'visible.lesson': false
       })  
     }else{
       this.setData({
-        sign_list: [{ text: '不限', value: 2, type: 'warn' }, { text: '已上课', value: 1 }, { text: '未上课', value: 0 }],
-        time_list: [{ text: '全部时间', value: 0 }, { text: '本周', value: 1, type: 'warn' }, { text: '上一周', value: 3 }, { text: '近一月', value: 4 }],
+        sign_list: [{ name: '所有状态', value: 2, color: '#FA5151' }, { name: '已上课', value: 1 }, { name: '未上课', value: 0 }],
+        time_list: [{ name: '全部时间', value: 0 }, { name: '本周', value: 1, color: '#FA5151' }, { name: '本月', value: 2 }],
         label_list: [
           { text: '函授', label_id: 'class', selected: true },
           { text: '导学', label_id: 'guide', selected: true }
@@ -296,7 +299,7 @@ Page({
           { text: '历史', course_label: 9, selected: true }
         ],
         select_time: '本周',
-        select_sign: '不限',
+        select_sign: '所有状态',
       })
     }
     this.getStudentLesson();

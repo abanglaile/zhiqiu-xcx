@@ -6,5 +6,8 @@
     "i-col": "../../iviewModule/col/index",
     "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell"
-  }
+  },
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#f8f8f9",
+  "navigationBarBackgroundColor": "#f8f8f9"
 }

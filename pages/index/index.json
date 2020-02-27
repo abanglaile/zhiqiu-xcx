@@ -9,7 +9,5 @@
     "i-tag": "../../iviewModule/tag/index",
     "i-spin": "../../iviewModule/spin/index"
   },
-  "backgroundColor": "#f8f8f9",
-  "navigationBarBackgroundColor": "#f8f8f9",
   "navigationBarTitleText": "知秋Class"
 }

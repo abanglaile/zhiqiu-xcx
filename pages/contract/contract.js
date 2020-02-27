@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getStudentGroup()   
+    // this.getStudentGroup()   
   },
 
   /**
@@ -103,11 +103,13 @@ Page({
               loading: false,
               student_group: res.data
             })
+            wx.stopPullDownRefresh()
           } else {
             this.setData({
               loading: false,
               student_group: []
             })
+            wx.stopPullDownRefresh()
           }
         }
       })

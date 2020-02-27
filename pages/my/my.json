@@ -12,6 +12,7 @@
     "i-grid-icon": "../../iviewModule/grid-icon/index",
     "i-grid-label": "../../iviewModule/grid-label/index"
   },
+  "enablePullDownRefresh": false,
   "backgroundColor": "#f8f8f9",
-  "navigationBarTitleText": "我的账户"
+  "navigationBarTitleText": "知秋Class"
 }
