@@ -11,12 +11,15 @@ Page({
     wx.getSetting({
       success: function (res) {
         if (res.authSetting['scope.userInfo']) {
+          // 更新全局状态
+          app.globalData.is_auth = true
+          // 获取信息
           wx.getUserInfo({
             success: function (res) {
               //从数据库获取用户信息
               // that.queryUserInfo();
               //用户已经授权过
-              wx.switchTab({
+              wx.navigateTo({
                 url: '../index/index'
               })
             }
@@ -29,10 +32,12 @@ Page({
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       app.globalData.userInfo = e.detail.userInfo;
+      // 更新全局状态
+      app.globalData.is_auth = true
       //插入登录的用户的相关信息到数据库
       // let that = this;
       // that.insertUserInfo(e);
-      wx.switchTab({
+      wx.navigateTo({
         url: '../index/index'
       })
       
@@ -49,6 +54,8 @@ Page({
           }
         }
       })
+      // 更新全局状态
+      app.globalData.is_auth = false
     }
   },
   //保存用户信息

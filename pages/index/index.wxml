@@ -4,6 +4,4 @@
   <!-- <view class="discription">更懂学生</view> -->
   <view class="discription">Know Student Better</view>
   <i-spin size="large"></i-spin>
-  <view>{{test}}</view>
-  <view>{{testid}}</view>
 </view>
