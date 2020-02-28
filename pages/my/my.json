@@ -14,5 +14,6 @@
   },
   "enablePullDownRefresh": false,
   "backgroundColor": "#f8f8f9",
+  "navigationBarBackgroundColor": "#f8f8f9",
   "navigationBarTitleText": "知秋Class"
 }

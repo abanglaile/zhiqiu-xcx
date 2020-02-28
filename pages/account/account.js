@@ -19,14 +19,20 @@ Page({
         })
     },
     onAddStudent: function (event) {
-        wx.navigateTo({
-            url: '/pages/bond/bond'
-        })
+        if (app.globalData.is_auth) {
+            wx.navigateTo({
+                url: '/pages/bond/bond'
+            })
+        } else {
+            wx.navigateTo({
+                url: '/pages/authorize/authorize'
+            })
+        }
     },
     // 事件处理函数
     onShow: function () {
         this.setData({
-            students: app.globalData.students,
+            students: app.globalData.is_auth ? app.globalData.students : [],
             current: app.globalData.student_id
         })
     }
