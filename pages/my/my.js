@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    is_auth: false,
     visible: {},
     loading: false,
     my: {}
@@ -17,11 +18,17 @@ Page({
     })
   },
 
+  onAuth: function () {
+    wx.navigateTo({
+      url: '/pages/authorize/authorize'
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(app.globalData)
+    // console.log(app.globalData.userInfo)
     this.setData({
       students: app.globalData.students,
       my: app.globalData.userInfo
@@ -39,7 +46,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      is_auth: app.globalData.is_auth,
+      my: app.globalData.userInfo
+    })
   },
 
   /**

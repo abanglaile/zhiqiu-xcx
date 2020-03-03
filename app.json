@@ -43,5 +43,6 @@
         "selectedIconPath": "/images/user_fill.png"
       }
     ]
-  }
+  },
+  "usingComponents": {}
 }

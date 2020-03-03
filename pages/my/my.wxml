@@ -1,5 +1,6 @@
 <view class="wrapper">
-  <image class="logo" src="{{ my.avatarUrl }}" alt="知秋" />
+  <image wx:if="{{ is_auth }}" class="logo" src="{{ my.avatarUrl }}" alt="知秋" />
+  <view wx:else class="logo" bind:tap="onAuth">轻触登录</view>
   <view class="discription">{{ my.nickName }}</view>
   <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec"></i-divider>
 
