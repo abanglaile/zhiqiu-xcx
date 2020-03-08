@@ -3,12 +3,13 @@
     <view class="discription">轻触以切换学生</view>
     <i-divider class="divider" color="#2d8cf0" lineColor="#e9eaec"></i-divider>
 
-    <view wx:for="{{ students }}" wx:key="userid" class="card" mark:id="{{ item.userid }}" bind:tap="onSwitchStudent">
+    <view wx:for="{{ students }}" wx:key="userid" class="card" mark:id="{{ item.userid }}" mark:name="{{ item.realname }}" bind:tap="onSwitchStudent">
         <image class="avatar" src="{{ item.avatar }}" alt="学生" />
         <view class="card-content">
             <view class="card-name">{{ item.realname }}</view>
-            <i-tag wx:if="{{ current == item.userid }}" class="i-tags" name="标签" color="green">当前使用</i-tag>
+            <i-tag wx:if="{{ current_id == item.userid }}" class="i-tags" name="标签" color="green">当前使用</i-tag>
         </view>
+        <i-icon class="card-logo" size="16" color="#495060" type="close" catch:tap="onDeleteStudent" />
     </view>
 
     <view class="card" bind:tap="onAddStudent">
@@ -18,3 +19,10 @@
         </view>
     </view>
 </view>
+
+<i-action-sheet visible="{{ sheet }}" actions="{{ actions }}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem" mask-closable="{{ false }}">
+    <view slot="header" style="padding: 16px">
+        <view style="color: #444;font-size: 16px">确定与{{ selected_name }}解除绑定吗？</view>
+    </view>
+</i-action-sheet>
+<i-message id="message" />

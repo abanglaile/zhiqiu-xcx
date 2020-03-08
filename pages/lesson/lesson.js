@@ -1,6 +1,6 @@
 // pages/stuStatus/stuStatus.js
 
-const moment = require('../../miniprogram_npm/moment/index')
+// const moment = require('../../miniprogram_npm/moment/index')
 const app = getApp()
 
 Page({
@@ -88,10 +88,10 @@ Page({
         })        
       },
       fail: (res) => {
-        $Toast({
-          content: '获取课程数据',
-          type: 'error'
-        });
+        wx.showToast({
+          title: '获取课程数据失败',
+          duration: 1000
+        })
         console.logs(res.data)
       }
     })
@@ -231,10 +231,10 @@ Page({
           this.setData({
             loading: false,
           })
-          $Toast({
-            content: '获取课程数据',
-            type: 'error'
-          });
+          wx.showToast({
+            title: '获取课程数据失败',
+            duration: 1000
+          })
           wx.stopPullDownRefresh()
           console.logs(res.data)
         }
@@ -242,11 +242,11 @@ Page({
     }
   },
 
-  formatLessonTime(start_time, end_time) {
-    start_time = new Date();
-    end_time = new Date();
-    return moment(start_time).format("YYYY-MM-DD HH:mm") + "  -  " + moment(end_time).format("HH:mm");
-  },
+  // formatLessonTime(start_time, end_time) {
+  //   start_time = new Date();
+  //   end_time = new Date();
+  //   return moment(start_time).format("YYYY-MM-DD HH:mm") + "  -  " + moment(end_time).format("HH:mm");
+  // },
 
   selectTime(e) {
     let time_list = [{ name: '全部时间', value: 0 }, { name: '本周', value: 1 }, { name: '本月', value: 2 }];

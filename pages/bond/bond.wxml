@@ -21,6 +21,4 @@
     
     <i-spin size="large" fix wx:if="{{ loading }}"></i-spin>
   </view>
-
-  <i-message id="message" />
 </view>

@@ -71,9 +71,6 @@ module.exports.getLessonTime = getLessonTime;
     bind:cancel="onClose"
     bind:click="selectTime"
     mask-closable>
-    <view slot="header">
-      <view class="title">课程时间</view>
-    </view>
   </i-action-sheet>
 
   <i-action-sheet
@@ -84,9 +81,6 @@ module.exports.getLessonTime = getLessonTime;
     bind:cancel="onClose"
     bind:click="selectSign"
     mask-closable>
-    <view slot="header">
-      <view class="title">课程状态</view>
-    </view>
   </i-action-sheet>
 
   <i-action-sheet
@@ -95,7 +89,6 @@ module.exports.getLessonTime = getLessonTime;
     bind:cancel="onClose"
     mask-closable>
     <view slot="header">
-      <view class="title">课程类型</view>
       <view class="desc">
         <i-panel title="授课方式" hide-border>
           <view style="padding: 15px;">

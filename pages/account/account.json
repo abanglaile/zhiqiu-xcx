@@ -6,7 +6,8 @@
         "i-divider": "../../iviewModule/divider/index",
         "i-cell-group": "../../iviewModule/cell-group/index",
         "i-cell": "../../iviewModule/cell/index",
-        "i-tag": "../../iviewModule/tag/index"
+        "i-tag": "../../iviewModule/tag/index",
+        "i-action-sheet": "../../iviewModule/action-sheet/index"
     },
     "backgroundColor": "#f8f8f9",
     "navigationBarBackgroundColor": "#f8f8f9",

@@ -1,5 +1,4 @@
 // pages/bond.js
-const { $Message } = require('../../iviewModule/base/index')
 const app = getApp()
 
 Page({
@@ -39,21 +38,25 @@ Page({
         'content-type': 'application/json'
       },
       success: (res) => {
-        $Message({
-          content: res.data.msg,
-          type: 'success'
-        })
         app.globalData.userid = res.data.userid
         this.setData({
           loading: false,
         })
         // 成功后刷新绑定信息
-        this.onApiGetStudents()
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success',
+          duration: 1000
+        })
+        setTimeout(
+          () => { this.onApiGetStudents() },
+          1000
+        )
       },
       fail: (res) => {
-        $Message({
-          content: '绑定失败',
-          type: 'error'
+        wx.showToast({
+          title: '绑定失败',
+          duration: 1500
         })
       }
     })
