@@ -1,5 +1,45 @@
 <!--pages/stuStatus/stuStatus.wxml-->
 <!-- <text>pages/stuStatus/stuStatus.wxml</text> -->
+<wxs module="util">
+var getLessonTime = function(st, et) {
+  var start_time = getDate(Date.parse(st))
+  var end_time = getDate(Date.parse(et))
+  var y = start_time.getFullYear()  
+  var m = start_time.getMonth() + 1  
+  var d = start_time.getDate()
+
+  var wd = '周日'
+  switch(start_time.getDay()){
+    case 1:
+      wd = '周一'
+      break
+    case 2:
+      wd = '周二'
+      break
+    case 3:
+      wd = '周三'
+      break
+    case 4:
+      wd = '周四'
+      break
+    case 5:
+      wd = '周五'
+      break
+    case 6:
+      wd = '周六'
+  }
+
+  var h = start_time.getHours();  
+  var min = start_time.getMinutes();  
+  var eh = end_time.getHours();
+  var emin = end_time.getMinutes();
+  min = min < 10 ? ('0' + min) : min;
+  emin = emin < 10 ? ('0' + emin) : emin;
+  return y + '年' + m + '月' + d + '日 ' + wd + h + ':'+ min + ' - ' + eh + ":" + emin
+}
+
+module.exports.getLessonTime = getLessonTime;
+</wxs>
 <view class="wrapper">
   <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>
   <view class="sort-list">
@@ -84,19 +124,19 @@
               data-index="{{index}}"
               wx:for="{{course_list}}"
               wx:for-index="index"
-              wx:key="text">
-              {{item.text}}
+              wx:key="course_label">
+              {{item.course_label_name}}
             </i-button>
           </view>
         </i-panel>
         <i-panel title="">
           <view class="dialog-button-wrapper" style="padding: 15px;">
-            <view class="reset-button-wrapper" mark:value="0" bind:tap="buttontap">
+            <view class="reset-button-wrapper" mark:value="0" bind:tap="onReset">
               <i-icon size="26" type="refresh" />
               重置
             </view>
             <view class="confirm-button-wrapper">
-              <i-button mark:value="1" bind:click="buttontap" type="primary" size="large" long>确认</i-button>
+              <i-button mark:value="1" bind:click="onOk" type="primary" size="large" long>确认</i-button>
             </view>
           </view>
         </i-panel>
@@ -119,7 +159,7 @@
     <view>
       <view style="padding:0 0 4px 16px;font-size:13px;color:gray;">
         <i-icon type="clock" size="20" color="#ccc" style="padding: 0 12rpx 0 0;" />
-        {{item.lesson_time}}
+        {{util.getLessonTime(item.start_time, item.end_time)}}
       </view>
       <view class="i-card-header" style="padding:0 0 12px 16px;font-size:13px;color:gray;">
         <i-icon type="coordinates_fill" size="20" color="#ccc" style="padding: 0 12rpx 0 0;" />
@@ -128,7 +168,7 @@
     </view>
     <view class="i-card-body" style="padding:8px 16px;font-size:13px;color:gray;">
       <view>
-        授课老师：{{item.teacher_name}}
+        授课老师：{{item.teacher_name}} <icon style="margin-left: 4rpx" wx:if="{{item.is_sign}}" type="success_no_circle" size="13"/>
       </view>
     </view>
   </view>

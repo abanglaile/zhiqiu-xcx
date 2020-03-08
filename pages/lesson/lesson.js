@@ -21,15 +21,15 @@ Page({
       { text: '导学', label_id: 'guide', selected: true }
     ],
     course_list: [
-      { text: '数学', course_label: 1, selected: true },
-      { text: '音乐', course_label: 2, selected: true },
-      { text: '英语', course_label: 3, selected: true },
-      { text: '物理', course_label: 4, selected: true },
-      { text: '化学', course_label: 5, selected: true },
-      { text: '地理', course_label: 6, selected: true },
-      { text: '语文', course_label: 7, selected: true },
-      { text: '政治', course_label: 8, selected: true },
-      { text: '历史', course_label: 9, selected: true }
+      // { course_label_name: '数学', course_label: 1, selected: true },
+      // { course_label_name: '音乐', course_label: 2, selected: true },
+      // { course_label_name: '英语', course_label: 3, selected: true },
+      // { course_label_name: '物理', course_label: 4, selected: true },
+      // { course_label_name: '化学', course_label: 5, selected: true },
+      // { course_label_name: '地理', course_label: 6, selected: true },
+      // { course_label_name: '语文', course_label: 7, selected: true },
+      // { course_label_name: '政治', course_label: 8, selected: true },
+      // { course_label_name: '历史', course_label: 9, selected: true }
     ],
     select_time: '本周',
     select_sign: '所有状态',
@@ -70,6 +70,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.request({
+      url: app.globalData.server_url + '/getStuCourse', //仅为示例，并非真实的接口地址
+      data: {
+        student_id: app.globalData.student_id,
+      },
+      method: 'get',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) => {
+        this.setData({
+          course_list: res.data ? res.data.map((item) => {
+            item.selected = true
+            return item
+          }) : []
+        })        
+      },
+      fail: (res) => {
+        $Toast({
+          content: '获取课程数据',
+          type: 'error'
+        });
+        console.logs(res.data)
+      }
+    })
   },
   
   /**
@@ -144,16 +169,20 @@ Page({
   },
 
   getStartEndTime(text){    
+    var start_time = new Date();
+    var end_time = new Date();
     switch(text){
       case '本周':
+        var weekday = start_time.getDay() || 7; //获取星期几
+        start_time.setDate(start_time.getDate() - weekday + 1);//往前算（weekday-1）天，年份、月份会自动变化
         return {
-          start_time: moment().startOf('week'),
-          end_time: moment().endOf('week')
+          start_time: start_time,
+          end_time: null
         }
       case '本月':
         return {
-          start_time: moment().startOf('month'),
-          end_time: moment().endOf('month').endOf('month')
+          start_time: start_time.setDate(1),
+          end_time: null
         }
       default:
         return {
@@ -207,7 +236,7 @@ Page({
             type: 'error'
           });
           wx.stopPullDownRefresh()
-          console.log(res.data)
+          console.logs(res.data)
         }
       })
     }
@@ -273,36 +302,22 @@ Page({
     this.setData(data)
   },
 
-  buttontap(e) {
-    // console.log(e.detail)
-    if(e.mark.value == "1"){
-      this.setData({
-        'visible.lesson': false
-      })  
-    }else{
-      this.setData({
-        sign_list: [{ name: '所有状态', value: 2, color: '#FA5151' }, { name: '已上课', value: 1 }, { name: '未上课', value: 0 }],
-        time_list: [{ name: '全部时间', value: 0 }, { name: '本周', value: 1, color: '#FA5151' }, { name: '本月', value: 2 }],
-        label_list: [
-          { text: '函授', label_id: 'class', selected: true },
-          { text: '导学', label_id: 'guide', selected: true }
-        ],
-        course_list: [
-          { text: '数学', course_label: 1, selected: true },
-          { text: '音乐', course_label: 2, selected: true },
-          { text: '英语', course_label: 3, selected: true },
-          { text: '物理', course_label: 4, selected: true },
-          { text: '化学', course_label: 5, selected: true },
-          { text: '地理', course_label: 6, selected: true },
-          { text: '语文', course_label: 7, selected: true },
-          { text: '政治', course_label: 8, selected: true },
-          { text: '历史', course_label: 9, selected: true }
-        ],
-        select_time: '本周',
-        select_sign: '所有状态',
-      })
-    }
-    this.getStudentLesson();
+  onOk(e) {
+    this.setData({
+      'visible.lesson': false
+    })
+    this.getStudentLesson();  
   },
-
+  onReset(e){
+    this.setData({
+      label_list: [
+        { text: '函授', label_id: 'class', selected: true },
+        { text: '导学', label_id: 'guide', selected: true }
+      ],
+      course_list: this.data.course_list.map(item => {
+        item.selected = true
+        return item
+      })
+    })
+  },
 })
