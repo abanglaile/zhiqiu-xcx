@@ -70,6 +70,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  },
+  
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     wx.request({
       url: app.globalData.server_url + '/getStuCourse', //仅为示例，并非真实的接口地址
       data: {
@@ -85,7 +98,8 @@ Page({
             item.selected = true
             return item
           }) : []
-        })        
+        })
+        this.getStudentLesson();
       },
       fail: (res) => {
         wx.showToast({
@@ -94,21 +108,7 @@ Page({
         })
         console.logs(res.data)
       }
-    })
-  },
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getStudentLesson();
+    })  
   },
 
   /**
@@ -201,7 +201,7 @@ Page({
       label_id_list: this.data.label_list.filter(l => l.selected),
       is_sign: this.data.select_sign == '所有状态' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
-    console.log(JSON.stringify(filter_option));
+    // console.log(JSON.stringify(filter_option));
     // console.log(app.globalData.students)
     if (app.globalData.student_id) {
       this.setData({
