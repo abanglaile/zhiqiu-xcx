@@ -1,11 +1,14 @@
 // pages/hourInquire/hourInquire.js
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    test_json: [{}, {}]
+    hisContractList : [],
+    total_fee : '',
   },
 
   /**
@@ -26,7 +29,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.request({
+      url: app.globalData.server_url + '/getHistoryContract', 
+      data: {
+        stu_group_id: app.globalData.stu_group_id,
+      },
+      method: 'get',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: (res) => {
+        console.log(res.data)
+        this.setData({
+          hisContractList : res.data.hisContractList,//历史合同列表
+          total_fee : res.data.total_fee //历史合同总金额
+        })
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '获取历史合同数据失败',
+          duration: 1000
+        })
+      }
+    })  
   },
 
   /**

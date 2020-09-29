@@ -114,7 +114,7 @@ module.exports.toFixed = toFixed;
   <!-- <mp-cell link url="../index" footer="查看历史合同" >
   </mp-cell> -->
   <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>
-  <view wx:for="{{student_group}}" wx:for-index="idx" class="i-card g-card">
+  <view wx:for="{{student_group}}" wx:for-index="idx" class="i-card g-card" mark:id="{{ item.stu_group_id }}">
     <view class="i-card-header" style="padding: 0 0 40rpx 18rpx;">
       <view style="background: {{util.getAvatarBg(item.course_label)}};" class="i-class i-avatar i-avatar-circle i-avatar-small">
         <view class="i-avatar-string">{{util.getAvatarText(item.course_label)}}</view>
@@ -142,7 +142,7 @@ module.exports.toFixed = toFixed;
       </i-col>
     </i-row>
     <view style="padding-top: 8px; display: flex; justify-content: flex-end;">
-      <view style="font-size: 12px; color: #80848f" bindtap="on">
+      <view style="font-size: 12px; color: #80848f" bind:tap="onCheckHisContract">
         <text>查看历史记录</text>
         <i-icon size="12" type="enter" />
       </view>
