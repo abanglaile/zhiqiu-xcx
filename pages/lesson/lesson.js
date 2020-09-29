@@ -86,6 +86,7 @@ Page({
     wx.request({
       url: app.globalData.server_url + '/getStuCourse', //仅为示例，并非真实的接口地址
       data: {
+        // student_id: "26aae4804fcb11e9881259fe263fe740",
         student_id: app.globalData.student_id,
       },
       method: 'get',
@@ -93,6 +94,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: (res) => {
+        console.log(res.data)
         this.setData({
           course_list: res.data ? res.data.map((item) => {
             item.selected = true

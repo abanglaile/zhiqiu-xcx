@@ -4,6 +4,7 @@
     "i-avatar": "../../iviewModule/avatar/index",
     "i-row": "../../iviewModule/row/index",
     "i-col": "../../iviewModule/col/index",
+    "i-icon": "../../iviewModule/icon/index",
     "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell"
   },
