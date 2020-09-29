@@ -1,6 +1,6 @@
 // pages/stuStatus/stuStatus.js
 
-const moment = require('../../miniprogram_npm/moment/index')
+// const moment = require('../../miniprogram_npm/moment/index')
 const app = getApp()
 
 Page({
@@ -70,6 +70,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  },
+  
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     wx.request({
       url: app.globalData.server_url + '/getStuCourse', //仅为示例，并非真实的接口地址
       data: {
@@ -87,30 +100,17 @@ Page({
             item.selected = true
             return item
           }) : []
-        })        
+        })
+        this.getStudentLesson();
       },
       fail: (res) => {
-        $Toast({
-          content: '获取课程数据',
-          type: 'error'
-        });
+        wx.showToast({
+          title: '获取课程数据失败',
+          duration: 1000
+        })
         console.logs(res.data)
       }
-    })
-  },
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getStudentLesson();
+    })  
   },
 
   /**
@@ -203,7 +203,7 @@ Page({
       label_id_list: this.data.label_list.filter(l => l.selected),
       is_sign: this.data.select_sign == '所有状态' ? -1 : this.data.select_sign == '已上课' ? 1 : 0
     }
-    console.log(JSON.stringify(filter_option));
+    // console.log(JSON.stringify(filter_option));
     // console.log(app.globalData.students)
     if (app.globalData.student_id) {
       this.setData({
@@ -233,10 +233,10 @@ Page({
           this.setData({
             loading: false,
           })
-          $Toast({
-            content: '获取课程数据',
-            type: 'error'
-          });
+          wx.showToast({
+            title: '获取课程数据失败',
+            duration: 1000
+          })
           wx.stopPullDownRefresh()
           console.logs(res.data)
         }
@@ -244,11 +244,11 @@ Page({
     }
   },
 
-  formatLessonTime(start_time, end_time) {
-    start_time = new Date();
-    end_time = new Date();
-    return moment(start_time).format("YYYY-MM-DD HH:mm") + "  -  " + moment(end_time).format("HH:mm");
-  },
+  // formatLessonTime(start_time, end_time) {
+  //   start_time = new Date();
+  //   end_time = new Date();
+  //   return moment(start_time).format("YYYY-MM-DD HH:mm") + "  -  " + moment(end_time).format("HH:mm");
+  // },
 
   selectTime(e) {
     let time_list = [{ name: '全部时间', value: 0 }, { name: '本周', value: 1 }, { name: '本月', value: 2 }];
