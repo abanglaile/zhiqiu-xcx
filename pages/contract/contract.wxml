@@ -111,41 +111,38 @@ module.exports.toFixed = toFixed;
 </wxs>
 
 <view class="wrapper">
-  <!-- <mp-cell link url="../index" footer="查看历史合同" >
-  </mp-cell> -->
   <mp-loading duration="{{900}}" type="dot-gray" show="{{loading}}" animated="true"></mp-loading>
   <view wx:for="{{student_group}}" wx:for-index="idx" class="i-card g-card" mark:id="{{ item.stu_group_id }}">
-    <view class="i-card-header" style="padding: 0 0 40rpx 18rpx;">
-      <view style="background: {{util.getAvatarBg(item.course_label)}};" class="i-class i-avatar i-avatar-circle i-avatar-small">
-        <view class="i-avatar-string">{{util.getAvatarText(item.course_label)}}</view>
-      </view>
-      <view class="i-card-header-content" style="margin-left: 16rpx; font-size: 30rpx;">
+    <view class="i-card-header" style="padding: 12px 18px;">
+      <view class="i-card-header-content" style="font-size:30rpx; display: flex; justify-content: flex-start; align-items: center;">
+        <view style="background: {{util.getAvatarBg(item.course_label)}}; margin-right: 5px;" class="i-class i-avatar i-avatar-circle i-avatar-small">
+          <view class="i-avatar-string">{{util.getAvatarText(item.course_label)}}</view>
+        </view>
         {{item.group_name}}
       </view>
+      <view class="i-card-header-extra">
+        <view style="font-size: 12px; color: #80848f" bind:tap="onCheckHisContract">
+          <text>查看历史记录</text>
+          <i-icon size="12" type="enter" />
+        </view>
+      </view>
     </view>
-    <i-row>
-      <i-col offset="1" span="8">
-        <view style="font-size: 24rpx;">函授剩余课时</view>
+    
+    <i-row i-class="row">
+      <i-col span="12" i-class="col col-left">
+        <view style="font-size: 12px; color: #80848f;">函授余额</view>
         <view>
-          <span style="font-size: 44rpx; color: #1890ff;">{{util.toFixed(item.remain_class/60, 1)}}</span>
-          <!-- <span style="font-size: 44rpx; color: {{util.getAvatarBg(item.course_label)}};">{{util.toFixed(item.remain_class/60, 1)}}</span> -->
+          <span style="font-size: 44rpx; color: #495060;">{{util.toFixed(item.remain_class/60, 1)}}</span>
           <span style="font-size: 20rpx;"> 小时</span>
         </view>
       </i-col>
-      <i-col offset="2" span="8">
-        <view style="font-size: 24rpx;">导学剩余课时</view>
+      <i-col span="12" i-class="col">
+        <view style="font-size: 12px; color: #80848f;">导学余额</view>
         <view>
-          <span style="font-size: 44rpx; color: #1890ff;">{{util.toFixed(item.remain_guide/60, 1)}}</span>
-          <!-- <span style="font-size: 44rpx; color: {{util.getAvatarBg(item.course_label)}};">{{util.toFixed(item.remain_guide/60, 1)}}</span> -->
+          <span style="font-size: 44rpx; color: #495060;">{{util.toFixed(item.remain_guide/60, 1)}}</span>
           <span style="font-size: 20rpx;"> 小时</span>
         </view>
       </i-col>
     </i-row>
-    <view style="padding-top: 8px; display: flex; justify-content: flex-end;">
-      <view style="font-size: 12px; color: #80848f" bind:tap="onCheckHisContract">
-        <text>查看历史记录</text>
-        <i-icon size="12" type="enter" />
-      </view>
-    </view>
   </view>
 </view>

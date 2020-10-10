@@ -1,1 +1,43 @@
 /* pages/hourInquire/hourInquire.wxss */
+@import '../../iviewModule/card/index.wxss';
+
+page {
+    background-color: #f8f8f9;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.g-card {
+    width: 90%;
+    margin-top: 15px;
+}
+
+.g-card:last-child {
+    margin-bottom: 15px;
+}
+
+.row {
+    display: flex;
+    padding: 5px;
+    border-bottom: solid 1px #e9eaec;
+    align-items: center;
+}
+.row:last-child {
+    border-bottom: none;
+}
+
+.row-label {
+    width: 45%;
+}
+
+.row-content {
+    font-size: 18px;
+    color: #495060;
+}

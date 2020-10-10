@@ -16,12 +16,24 @@ page {
 }
 
 .g-card {
-    width: 80%;
-    margin-top: 20rpx;
-    padding: 36rpx 36rpx 36rpx 36rpx;
-    box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.2);
+    width: 90%;
+    margin-top: 15px;
 }
 
 .g-card:last-child {
-    margin-bottom: 20rpx;
+    margin-bottom: 15px;
+}
+
+.row {
+    padding: 10px;
+}
+
+.col {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.col-left {
+    border-right: solid 1px #e9eaec;
 }

@@ -2,5 +2,8 @@
   "usingComponents": {
     "i-row": "../../iviewModule/row/index",
     "i-col": "../../iviewModule/col/index"
-  }
+  },
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#f8f8f9",
+  "navigationBarBackgroundColor": "#f8f8f9"
 }

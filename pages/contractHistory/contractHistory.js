@@ -1,5 +1,6 @@
 // pages/hourInquire/hourInquire.js
 const app = getApp()
+const util = require('../../utils/util.js')
 
 Page({
 
@@ -41,7 +42,11 @@ Page({
       success: (res) => {
         console.log(res.data)
         this.setData({
-          hisContractList : res.data.hisContractList,//历史合同列表
+          hisContractList : res.data.hisContractList.map((node) => {
+            // node.payment_time = util.formatDate(new Date(node.payment_time), 'yyyy-mm-dd hh:mi:ss')
+            node.payment_time = util.formatTime(new Date(node.payment_time))
+            return node
+          }),//历史合同列表
           total_fee : res.data.total_fee //历史合同总金额
         })
       },

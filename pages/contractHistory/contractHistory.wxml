@@ -6,8 +6,59 @@ module.exports.toFixed = toFixed;
 </wxs>
 
 <view class="wrapper">
-  <view wx:for="{{hisContractList}}" wx:for-index="idx" style="margin: 20rpx 32rpx; padding: 36rpx 60rpx; box-shadow:0 5px 10px 0 rgba(0,0,0,0.2);border: 1rpx solid #dddee1;border-radius: 5px;" >
-    <view style="padding: 0 0 36rpx 0;">
+  <view wx:for="{{hisContractList}}" wx:for-index="idx" class="i-card g-card">
+    <view class="i-card-header" style="padding: 12px 18px;">
+      <view class="i-card-header-content" style="font-size:30rpx; display: flex; justify-content: flex-start; align-items: center;">
+        {{item.group_name}}
+      </view>
+      <view class="i-card-header-extra">
+        <view>
+          <span style="font-size: 50rpx;font-weight: bold">{{item.fee}}</span>
+          <span style="font-size: 24rpx;"> 元</span>
+        </view>
+      </view>
+    </view>
+
+    <view style="padding: 12px 18px; border-top: solid 1px #dddee1;">
+      <view class="row">
+        <view class="row-label">
+          合同折扣
+        </view>
+        <view class="row-content">
+          {{item.discount}}%
+        </view>
+      </view>
+      
+      <view class="row">
+        <view class="row-label">
+          合同时间
+        </view>
+        <view class="row-content">
+          {{item.payment_time}}
+        </view>
+      </view>
+
+      <view class="row">
+        <view class="row-label">
+          函授课时
+        </view>
+        <view class="row-content">
+          {{util.toFixed(item.class_min/60, 1)}} 小时
+        </view>
+      </view>
+
+      <view class="row">
+        <view class="row-label">
+          导学课时
+        </view>
+        <view class="row-content">
+          {{util.toFixed(item.guide_min/60, 1)}} 小时
+        </view>
+      </view>
+    </view>
+
+
+    <!-- <view style="padding: 0 0 36rpx 0;">
     <i-row>
       <i-col span="10">
         <view style="font-size: 24rpx; color: #1890ff;">合同金额</view>
@@ -55,6 +106,6 @@ module.exports.toFixed = toFixed;
         </view>
       </i-col>
     </i-row>
-    </view>
+    </view> -->
   </view>
 </view>
