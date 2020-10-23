@@ -34,6 +34,7 @@ Page({
       url: app.globalData.server_url + '/getHistoryContract', 
       data: {
         stu_group_id: app.globalData.stu_group_id,
+        student_id: app.globalData.student_id,
       },
       method: 'get',
       header: {
