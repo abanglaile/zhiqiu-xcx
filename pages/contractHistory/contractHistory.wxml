@@ -25,7 +25,7 @@ module.exports.toFixed = toFixed;
           合同折扣
         </view>
         <view class="row-content">
-          {{item.discount}}%
+          {{ item.discount/10 }}折
         </view>
       </view>
       
