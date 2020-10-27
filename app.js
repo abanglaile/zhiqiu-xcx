@@ -38,6 +38,7 @@ App({
     students: [], // 已绑定的所有学生信息
     student_id: '', // 当前选择的学生id
     stu_group_id:'',//当前选择的分组id
+    lesson_id:'',//当前选择的lesson id
     server_url: "https://www.zhiqiu.pro/api"
     // server_url: "http://127.0.0.1:7001/api"
   }

@@ -66,6 +66,21 @@ Page({
     ],
   },
 
+   // 跳转到课程详细情况页
+   onCheckLesson: function (event) {
+    // console.log("event.mark.id:",event.mark.id)
+    let is_sign = event.mark.id.split("+")[0]
+    let lesson_id = event.mark.id.split("+")[1]
+    // console.log("is_sign:",is_sign)
+    // console.log("lesson_id:",lesson_id)
+    if(is_sign == 1){
+      app.globalData.lesson_id = lesson_id
+      wx.navigateTo({
+        url: '/pages/lessonView/lessonView'
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

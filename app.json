@@ -8,7 +8,8 @@
     "pages/authorize/authorize",
     "pages/contract/contract",
     "pages/my/my",
-    "pages/contractHistory/contractHistory"
+    "pages/contractHistory/contractHistory",
+    "pages/lessonView/lessonView"
   ],
   "window": {
     "backgroundTextStyle": "light",

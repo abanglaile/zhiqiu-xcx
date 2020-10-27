@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "i-cell-group": "../../iviewModule/cell-group/index",
+    "i-cell": "../../iviewModule/cell/index",
+    "i-tag": "../../iviewModule/tag/index",
+    "i-action-sheet": "../../iviewModule/action-sheet/index",
+    "i-progress": "../../iviewModule/progress/index",
+    "i-icon": "../../iviewModule/icon/index",
+    "i-divider": "../../iviewModule/divider/index"
+  }
+}

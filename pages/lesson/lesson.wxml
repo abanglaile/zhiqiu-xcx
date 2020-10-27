@@ -137,7 +137,7 @@ module.exports.getLessonTime = getLessonTime;
     </view>
   </i-action-sheet>
 
-  <view wx:for="{{student_lesson}}" wx:for-index="idx" wx:key="id" class="i-card g-card">
+  <view wx:for="{{student_lesson}}" wx:for-index="idx" wx:key="id" class="i-card g-card" mark:id="{{item.is_sign}}+{{item.lesson_id}}" bind:tap="onCheckLesson">
     <view class="i-card-header" style="padding: 12px 18px;">
       <!-- <view style="background: #1890ff; margin-right: 20rpx" class="i-class i-avatar i-avatar-circle i-avatar-small">
           <view class="i-avatar-string">英</view>

@@ -1,0 +1,45 @@
+      <view >
+        <view class="wrapper-chapter">
+          <view class="title">知识点点评</view>       
+          <i-cell-group class="list" i-class="card3">
+            <i-cell i-class="list-cell" wx:for="{{ kp_comment }}" wx:for-item="kp" wx:key="comment_id" >
+              <view style="font-size: 32rpx;color: #1c2438">#{{ kp.kpname }}#</view>
+              <view class="change">
+                <view style="color:#80848f; margin-right: 4px"> {{ kp.kp_comment_content }} </view>
+              </view>
+              <view wx:if="{{ kp.side }}" slot="footer">
+                <i-tag checked="false" color="green">良好</i-tag>
+              </view>
+              <view wx:else slot="footer">
+                <i-tag checked="false" color="red">较差</i-tag>
+              </view>
+            </i-cell>
+          </i-cell-group>
+        </view>
+
+        <view class="wrapper-chapter">
+          <view class="title">课堂表现</view>       
+          <i-cell-group class="list" i-class="card3">
+            <i-cell i-class="list-cell" wx:for="{{ pf_comment }}" wx:for-item="pf" wx:key="comment_id" >
+              <view style="font-size: 32rpx;color: #1c2438">#{{ pf.label_name }}#</view>
+              <view class="change">
+                <view style="color:#80848f; margin-right: 4px"> {{ pf.pf_comment_content }} </view>
+              </view>
+            </i-cell>
+          </i-cell-group>
+        </view>
+
+        <view class="wrapper-chapter">
+          <view class="title">课堂内容</view>       
+          <i-cell-group class="list" i-class="card3">
+            <i-cell i-class="list-cell" wx:for="{{ lesson_content }}" wx:for-item="item" wx:key="lesson_id" >
+              <view style="font-size: 32rpx;color: #1c2438" wx:if="{{item.content_type == 0}}">课堂学习</view>
+              <view style="font-size: 32rpx;color: #1c2438" wx:elif="{{item.content_type == 1}}">知识讲解</view>
+              <view style="font-size: 32rpx;color: #1c2438" wx:else >课堂练习</view>
+              <view class="change">
+                <view style="color:#80848f; margin-right: 4px"> {{ item.content }} </view>
+              </view>
+            </i-cell>
+          </i-cell-group>
+        </view>
+      </view>
