@@ -328,11 +328,11 @@ Page({
   onReset(e){
     this.setData({
       label_list: [
-        { text: '函授', label_id: 'class', selected: true },
-        { text: '导学', label_id: 'guide', selected: true }
+        { text: '函授', label_id: 'class', selected: false },
+        { text: '导学', label_id: 'guide', selected: false }
       ],
       course_list: this.data.course_list.map(item => {
-        item.selected = true
+        item.selected = false
         return item
       })
     })

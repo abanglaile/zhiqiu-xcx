@@ -126,7 +126,7 @@ module.exports.getLessonTime = getLessonTime;
           <view class="dialog-button-wrapper" style="padding: 15px;">
             <view class="reset-button-wrapper" mark:value="0" bind:tap="onReset">
               <i-icon size="26" type="refresh" />
-              重置
+              清空
             </view>
             <view class="confirm-button-wrapper">
               <i-button mark:value="1" bind:click="onOk" type="primary" size="large" long>确认</i-button>
