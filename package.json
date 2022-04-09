@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/abanglaile/zhiqiu-xcx#readme",
   "dependencies": {
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "weui-miniprogram": "^0.3.0"
   }
 }
